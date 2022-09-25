@@ -6,8 +6,8 @@
 //
 
 import Foundation
-///
-struct Model {
+/// Данная модель конвертирует введенный пользователем текст и возвращает его в измененном формате
+struct Words {
     func converting(text: String) -> String {
         if text == "leohl" {
             return "Hello"

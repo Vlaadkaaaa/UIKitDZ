@@ -7,42 +7,9 @@
 
 import UIKit
 
-///
+/// В данном классе создаются все элементы для отображения и также прописана их логика
 class ViewController: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .yellow
-        NotificationCenter.default.addObserver(self,
-                                                  selector: #selector(applicationWillEnterForeground),
-                                                  name: UIApplication.willEnterForegroundNotification,
-                                                  object: nil)
-    
-        self.view.addSubview(labelName)
-        self.view.addSubview(chooseGameLabel)
-        self.view.addSubview(sumNumberLabel)
-        self.view.addSubview(guessNumberLabel)
-        
-        self.view.addSubview(guessNumberButton)
-        self.view.addSubview(sumNumberButton)
-        self.view.addSubview(showNewVC)
-        sumNumberButton.addTarget(self, action: #selector(sumNumber), for: .allTouchEvents)
-        guessNumberButton.addTarget(self, action: #selector(guessNumber), for: .allTouchEvents)
-        showNewVC.addTarget(self, action: #selector(showVC), for: .allTouchEvents)
-    }
-    
-    func showAlertHello() {
-        let alert = UIAlertController(title: "Welcome", message: "В форме ниже введите свое ФИО",
-                                      preferredStyle: .alert)
-        alert.addTextField { textField in
-            textField.placeholder = "Введите ФИО"
-        }
-        let action = UIAlertAction(title: "Добавить", style: .default) { _ in
-            self.labelName.text = "Hello, " + (alert.textFields?.first?.text ?? "Guest") + "!"
-        }
-        alert.addAction(action)
-        self.present(alert, animated: true)
-    }
     var labelName: UILabel = {
         let label = UILabel(frame: CGRect(x: 20, y: 80, width: 350, height: 60))
         label.numberOfLines = 0
@@ -78,7 +45,6 @@ class ViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
     var sumNumberButton: UIButton = {
         var button = UIButton(frame: CGRect(x: 20, y: 410, width: 350, height: 50))
         button.setTitle("Сложение чисел", for: .normal)
@@ -86,7 +52,6 @@ class ViewController: UIViewController {
         button.layer.cornerRadius = 20
         return button
     }()
-    
     var guessNumberButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 20, y: 580, width: 350, height: 50))
         button.setTitle("Угадай число", for: .normal)
@@ -94,13 +59,56 @@ class ViewController: UIViewController {
         button.layer.cornerRadius = 20
         return button
     }()
-    
     var showNewVC: UIButton = {
         let button = UIButton(frame: CGRect(x: 20, y: 680, width: 350, height: 50))
         button.setTitle("Перейти к app 'MVC'", for: .normal)
         button.backgroundColor = .systemRed
         return button
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addLabelView()
+        addButtonView()
+        showAddTarget()
+    }
+    
+    func addLabelView() {
+        self.view.backgroundColor = .yellow
+        self.view.addSubview(labelName)
+        self.view.addSubview(chooseGameLabel)
+        self.view.addSubview(sumNumberLabel)
+        self.view.addSubview(guessNumberLabel)
+    }
+    
+    func addButtonView() {
+        self.view.addSubview(guessNumberButton)
+        self.view.addSubview(sumNumberButton)
+        self.view.addSubview(showNewVC)
+    }
+    
+    func showAddTarget() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationWillEnterForeground),
+                                               name: UIApplication.willEnterForegroundNotification,
+                                               object: nil)
+        sumNumberButton.addTarget(self, action: #selector(sumNumber), for: .allTouchEvents)
+        guessNumberButton.addTarget(self, action: #selector(guessNumber), for: .allTouchEvents)
+        showNewVC.addTarget(self, action: #selector(showVC), for: .allTouchEvents)
+    }
+    
+    func showAlertHello() {
+        let alert = UIAlertController(title: "Welcome", message: "В форме ниже введите свое ФИО",
+                                      preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "Введите ФИО"
+        }
+        let action = UIAlertAction(title: "Добавить", style: .default) { _ in
+            self.labelName.text = "Hello, " + (alert.textFields?.first?.text ?? "Guest") + "!"
+        }
+        alert.addAction(action)
+        self.present(alert, animated: true)
+    }
     
     @objc func applicationWillEnterForeground(notification: Notification) {
         showAlertHello()

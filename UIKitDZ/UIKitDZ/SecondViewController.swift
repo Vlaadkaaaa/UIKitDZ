@@ -7,19 +7,9 @@
 
 import UIKit
 
-///
+/// Данный VC добавляет элементы на второй экран приложения, модель вынесена в отдельный файл WordModel
 class SecondViewController: UIViewController {
-    private var model = Model()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .systemYellow
-        self.view.addSubview(startButton)
-        self.view.addSubview(presentTextlabel)
-        
-        startButton.addTarget(self, action: #selector(start), for: .allTouchEvents)
-
-    }
+    
     var presentTextlabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 20, y: 100, width: 350, height: 60))
         label.text = "Текст полученный после конвертации"
@@ -35,6 +25,20 @@ class SecondViewController: UIViewController {
         
         return button
     }()
+    
+    private var model = Words()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addView()
+        startButton.addTarget(self, action: #selector(start), for: .allTouchEvents)
+    }
+    
+    func addView() {
+        self.view.backgroundColor = .systemYellow
+        self.view.addSubview(startButton)
+        self.view.addSubview(presentTextlabel)
+    }
     
     @objc func start(sender: UIButton) {
         let alert = UIAlertController(title: "Введите слово", message: "", preferredStyle: .alert)
