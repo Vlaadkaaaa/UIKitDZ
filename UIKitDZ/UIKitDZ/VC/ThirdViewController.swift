@@ -6,19 +6,18 @@
 //
 
 import UIKit
-///
+/// Данный VC добавляет логику работы третьего экрана приложения
 class ThirdViewController: UIViewController {
     
     @IBOutlet weak var nameClientLabel: UILabel!
-    var bookingBool: Bool?
-    var paymentBool: Bool?
-    var vipBool: Bool?
-    var nameClient = ""
-    
     @IBOutlet weak var salePaymentLabel: UILabel!
     @IBOutlet weak var saleBookingLabel: UILabel!
     @IBOutlet weak var addVIPProcentLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
+    var bookingBool: Bool?
+    var paymentBool: Bool?
+    var vipBool: Bool?
+    var nameClient = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()

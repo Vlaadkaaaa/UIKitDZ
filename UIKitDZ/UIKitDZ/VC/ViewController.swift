@@ -7,19 +7,20 @@
 
 import UIKit
 
-///
+/// Данный VC добавляет логику работы первого экрана приложения
 class ViewController: UIViewController {
-    var loginDataBase = [(email: "1", password: "1")]
-
+  
     @IBOutlet weak var noneClient: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
     
+    var loginDataBase = [(email: "1", password: "1")]
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    @IBAction func signInButton(_ sender: Any) {
+
+    @IBAction func signInButtonAction(_ sender: Any) {
         if checkLogin(email: emailTextField.text ?? "user", password: passwordTextField.text ?? "user") {
             showNewVC(identifier: "secondVC")
         } else {

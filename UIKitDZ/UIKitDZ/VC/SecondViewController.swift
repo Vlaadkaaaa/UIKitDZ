@@ -6,28 +6,28 @@
 //
 
 import UIKit
-///
+/// Данный VC добавляет логику работы второго экрана приложения
 class SecondViewController: UIViewController {
 
     @IBOutlet weak var bookingSwitch: UISwitch!
     @IBOutlet weak var preparePaymentSwitch: UISwitch!
     @IBOutlet weak var vipRoomSwitch: UISwitch!
-    @IBOutlet weak var nameClienttextField: UITextField!
+    @IBOutlet weak var nameClientTextField: UITextField!
 
-    var model = Model()
+    var model = Sale()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        model.booking = true
+        model.isBooking = true
     }
 
-    @IBAction func invoiceButton(_ sender: Any) {
+    @IBAction func invoiceButtonAction(_ sender: Any) {
         showAlert()
     }
     func checkSwitch() {
-        bookingSwitch.isOn ? (model.booking = true) : (model.booking = false)
-        preparePaymentSwitch.isOn ? (model.prepayment = true) : (model.prepayment = false)
-        vipRoomSwitch.isOn ? (model.vipRomm = true) : (model.vipRomm = false)
+        bookingSwitch.isOn ? (model.isBooking = true) : (model.isBooking = false)
+        preparePaymentSwitch.isOn ? (model.isPrepayment = true) : (model.isPrepayment = false)
+        vipRoomSwitch.isOn ? (model.isVipRomm = true) : (model.isVipRomm = false)
     }
     
     func showAlert() {
@@ -46,10 +46,10 @@ class SecondViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
               guard let vc = storyboard.instantiateViewController(
                   withIdentifier: identifier) as? ThirdViewController else {return}
-        vc.bookingBool = model.booking
-        vc.paymentBool = model.prepayment
-        vc.vipBool = model.vipRomm
-        vc.nameClient = nameClienttextField.text ?? ""
+        vc.bookingBool = model.isBooking
+        vc.paymentBool = model.isPrepayment
+        vc.vipBool = model.isVipRomm
+        vc.nameClient = nameClientTextField.text ?? ""
      
         self.present(vc, animated: true, completion: nil)
     }

@@ -14,7 +14,7 @@
 		554613B128DB10DC00FFD0EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 554613B028DB10DC00FFD0EB /* Assets.xcassets */; };
 		554613B428DB10DC00FFD0EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 554613B228DB10DC00FFD0EB /* LaunchScreen.storyboard */; };
 		557F521F28DC500900632505 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F521E28DC500900632505 /* SecondViewController.swift */; };
-		557F522128DC507D00632505 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F522028DC507D00632505 /* Model.swift */; };
+		557F522128DC507D00632505 /* SaleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F522028DC507D00632505 /* SaleModel.swift */; };
 		557F522328DC558900632505 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F522228DC558900632505 /* ThirdViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +28,7 @@
 		554613B328DB10DC00FFD0EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		554613B528DB10DC00FFD0EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557F521E28DC500900632505 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		557F522028DC507D00632505 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		557F522028DC507D00632505 /* SaleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleModel.swift; sourceTree = "<group>"; };
 		557F522228DC558900632505 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,7 +64,7 @@
 			children = (
 				554613A728DB10D000FFD0EB /* AppDelegate.swift */,
 				554613A928DB10D000FFD0EB /* SceneDelegate.swift */,
-				557F522028DC507D00632505 /* Model.swift */,
+				557F522028DC507D00632505 /* SaleModel.swift */,
 				557F522628DD791F00632505 /* VC */,
 				554613AD28DB10D000FFD0EB /* Main.storyboard */,
 				554613B028DB10DC00FFD0EB /* Assets.xcassets */,
@@ -177,7 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				557F522128DC507D00632505 /* Model.swift in Sources */,
+				557F522128DC507D00632505 /* SaleModel.swift in Sources */,
 				557F521F28DC500900632505 /* SecondViewController.swift in Sources */,
 				554613AC28DB10D000FFD0EB /* ViewController.swift in Sources */,
 				554613A828DB10D000FFD0EB /* AppDelegate.swift in Sources */,
