@@ -6,7 +6,7 @@
 //
 
 import UIKit
-///
+/// Данный VC позволяет добавить новый контакт
 class AddInfoViewController: UIViewController {
     
     let addUserButtonAction: UIButton = {

@@ -6,9 +6,9 @@
 //
 
 import UIKit
-///
+/// В данном классе добавлены 3 контакта при помощи кода
 class BirthdayViewController: UIViewController {
-
+    // Contact 1
     var titleLabel: UILabel {
         let label = addLabel(pointX: 145, pointY: 20, width: 100, height: 30, text: "Birthday")
         label.font = .systemFont(ofSize: 24)
@@ -47,7 +47,7 @@ class BirthdayViewController: UIViewController {
         return view
     }
     
-    // 2
+    // Contact 2
     let imageUserTwo: UIImageView = {
        let image = UIImageView(image: UIImage(systemName: "person.crop.circle.fill"))
         image.frame = CGRect(x: 5, y: 170, width: 55, height: 55)
@@ -81,7 +81,7 @@ class BirthdayViewController: UIViewController {
         return view
     }
     
-    // 3
+    // Contact 3
     let imageUserThree: UIImageView = {
        let image = UIImageView(image: UIImage(systemName: "person.crop.circle.fill"))
         image.frame = CGRect(x: 5, y: 250, width: 55, height: 55)
@@ -124,9 +124,6 @@ class BirthdayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(addNewUserButtonAction)
-        addNewUserButtonAction.addTarget(self, action: #selector(addNewContact), for: .allTouchEvents)
-        
         self.view.addSubview(titleLabel)
         self.view.addSubview(nameOneLabel)
         self.view.addSubview(textOneLabel)
@@ -145,6 +142,10 @@ class BirthdayViewController: UIViewController {
         self.view.addSubview(imageUserThree)
         self.view.addSubview(countDayToBirthdayThree)
         self.view.addSubview(lineViewThree)
+        
+        self.view.addSubview(addNewUserButtonAction)
+        addNewUserButtonAction.addTarget(self, action: #selector(addNewContact), for: .allTouchEvents)
+        
     }
     
     func addLine(pointX: Int, pointY: Int, width: Int, height: Int) -> UIView {

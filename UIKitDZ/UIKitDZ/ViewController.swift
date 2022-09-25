@@ -7,7 +7,7 @@
 
 import UIKit
 
-///
+/// Данный VC отвечает за окно входа в приложение
 class ViewController: UIViewController {
     
     let logoView: UIView = {
@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         label.backgroundColor = .white
         label.textAlignment = .center
         label.text = "Birthday Reminder"
-        label.textColor = UIColor(cgColor: CGColor(red: 173/255, green: 198/255, blue: 244/255, alpha: 1.0))
+        label.textColor = UIColor(cgColor: CGColor(red: 40/255, green: 100/255, blue: 240/255, alpha: 0.6))
         return label
     }()
     
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     let emailLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 40, y: 300, width: 350, height: 20))
         label.text = "Email"
-        label.textColor = UIColor(cgColor: CGColor(red: 173/255, green: 198/255, blue: 244/255, alpha: 1.0))
+        label.textColor = UIColor(cgColor: CGColor(red: 40/255, green: 100/255, blue: 240/255, alpha: 0.6))
         label.font = .boldSystemFont(ofSize: 18)
         return label
     }()
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
     let passwordLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 40, y: 390, width: 310, height: 20))
         label.text = "Password"
-        label.textColor = UIColor(cgColor: CGColor(red: 173/255, green: 198/255, blue: 244/255, alpha: 1.0))
+        label.textColor = UIColor(cgColor: CGColor(red: 40/255, green: 100/255, blue: 240/255, alpha: 0.6))
         label.font = .boldSystemFont(ofSize: 18)
         return label
     }()
@@ -60,7 +60,12 @@ class ViewController: UIViewController {
         textField.setBottomBorder(color: .systemGray5)
         return textField
     }()
-    
+    var eyeButtonAction: UIButton {
+       let button = UIButton(frame: CGRect(x: 320, y: 430, width: 30, height: 30))
+        button.setImage(UIImage(systemName: "eye"), for: .normal)
+        button.addTarget(self, action: #selector(showSecretPassword), for: .allTouchEvents)
+        return button
+    }
     let faceIdLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 140, y: 500, width: 150, height: 30))
         label.text = "Вход по Face ID"
@@ -77,15 +82,15 @@ class ViewController: UIViewController {
         button.setTitle("Войти", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 20)
         button.layer.cornerRadius = 10
-        button.backgroundColor = UIColor(cgColor: CGColor(red: 173/255, green: 198/255, blue: 244/255, alpha: 1.0))
+        button.backgroundColor = UIColor(cgColor: CGColor(red: 40/255, green: 100/255, blue: 240/255, alpha: 0.6))
         return button
     }()
-    let color = UIColor(cgColor: CGColor(red: 174/255, green: 198/255, blue: 245/255, alpha: 1.0))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         showViewElements()
     }
+    
     func showViewElements() {
         self.view.addSubview(signInLabel)
         self.view.addSubview(logoView)
@@ -97,11 +102,18 @@ class ViewController: UIViewController {
         self.view.addSubview(signInButton)
         self.view.addSubview(faceIdLabel)
         self.view.addSubview(faceIdSwitch)
+        self.view.addSubview(eyeButtonAction)
         
         signInButton.addTarget(self, action: #selector(showNewVCAction), for: .allTouchEvents)
 
     }
-    
+    @objc func showSecretPassword() {
+        if passwordTextField.isSecureTextEntry {
+            passwordTextField.isSecureTextEntry = false
+        } else {
+            passwordTextField.isSecureTextEntry = true
+        }
+    }
     @objc func showNewVCAction() {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyBoard.instantiateViewController(
