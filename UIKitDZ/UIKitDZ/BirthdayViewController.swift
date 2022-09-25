@@ -114,7 +114,8 @@ class BirthdayViewController: UIViewController {
         let view = addLine(pointX: 20, pointY: 315, width: 370, height: 1)
         return view
     }
-    var addNewUserbuttonAction: UIButton = {
+    
+    var addNewUserButtonAction: UIButton = {
        var button = UIButton(frame: CGRect(x: 330, y: 20, width: 40, height: 40))
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         return button
@@ -123,8 +124,8 @@ class BirthdayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(addNewUserbuttonAction)
-        addNewUserbuttonAction.addTarget(self, action: #selector(addNewContact), for: .allTouchEvents)
+        self.view.addSubview(addNewUserButtonAction)
+        addNewUserButtonAction.addTarget(self, action: #selector(addNewContact), for: .allTouchEvents)
         
         self.view.addSubview(titleLabel)
         self.view.addSubview(nameOneLabel)
