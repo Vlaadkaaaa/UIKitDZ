@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         textField.setBottomBorder(color: .systemGray5)
         return textField
     }()
-    var eyeButtonAction: UIButton {
+    var eyeButton: UIButton {
        let button = UIButton(frame: CGRect(x: 320, y: 430, width: 30, height: 30))
         button.setImage(UIImage(systemName: "eye"), for: .normal)
         button.addTarget(self, action: #selector(showSecretPassword), for: .allTouchEvents)
@@ -92,32 +92,30 @@ class ViewController: UIViewController {
     }
     
     func showViewElements() {
-        self.view.addSubview(signInLabel)
-        self.view.addSubview(logoView)
-        self.view.addSubview(logoLabel)
-        self.view.addSubview(emailLabel)
-        self.view.addSubview(emailTextField)
-        self.view.addSubview(passwordLabel)
-        self.view.addSubview(passwordTextField)
-        self.view.addSubview(signInButton)
-        self.view.addSubview(faceIdLabel)
-        self.view.addSubview(faceIdSwitch)
-        self.view.addSubview(eyeButtonAction)
+        view.addSubview(signInLabel)
+        view.addSubview(logoView)
+        view.addSubview(logoLabel)
+        view.addSubview(emailLabel)
+        view.addSubview(emailTextField)
+        view.addSubview(passwordLabel)
+        view.addSubview(passwordTextField)
+        view.addSubview(signInButton)
+        view.addSubview(faceIdLabel)
+        view.addSubview(faceIdSwitch)
+        view.addSubview(eyeButton)
         
         signInButton.addTarget(self, action: #selector(showNewVCAction), for: .allTouchEvents)
 
     }
     @objc func showSecretPassword() {
-        if passwordTextField.isSecureTextEntry {
+        
+        guard passwordTextField.isSecureTextEntry else {return passwordTextField.isSecureTextEntry = true}
             passwordTextField.isSecureTextEntry = false
-        } else {
-            passwordTextField.isSecureTextEntry = true
-        }
     }
     @objc func showNewVCAction() {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        guard let vc = storyBoard.instantiateViewController(
+        guard let birthDayVC = storyBoard.instantiateViewController(
             withIdentifier: "birthdayVC") as? BirthdayViewController else {return}
-        self.present(vc, animated: true, completion: nil)
+        present(birthDayVC, animated: true, completion: nil)
     }
 }
