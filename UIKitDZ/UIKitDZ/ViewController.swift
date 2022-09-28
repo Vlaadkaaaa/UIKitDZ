@@ -11,17 +11,23 @@ import UIKit
 class ViewController: UIViewController {
     var buttonShare = UIButton()
     var textField = UITextField()
+    
+    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var defaultTextLabel: UILabel!
+    @IBOutlet weak var defaultLabelTextTwo: UILabel!
+    
     var activityViewController: UIActivityViewController?
-    var pickerView = UIPickerView()
-    var textFieldForPikcerView = UITextField(frame: CGRect(x: 50, y: 100, width: 300, height: 30))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textFieldForPikcerView.borderStyle = .line
-        self.view.addSubview(textFieldForPikcerView)
+        defaultTextLabel.textColor = .systemBlue
+        defaultLabelTextTwo.textColor = .systemBlue
+        self.pickerView.delegate = self
+        self.pickerView.dataSource = self
         createTextField()
         createButton()
     }
+    
     // MARK: - Method
     func createTextField() {
         self.textField.frame = CGRect(x: 0, y: 0, width: 200, height: 30)
@@ -32,17 +38,12 @@ class ViewController: UIViewController {
     }
     func createButton() {
         self.buttonShare = UIButton(type: .roundedRect)
-        self.buttonShare.frame = CGRect(x: 50, y: 500, width: 200, height: 44)
+        self.buttonShare.frame = CGRect(x: 50, y: 500, width: 290, height: 44)
         self.buttonShare.setTitle("Расшарить", for: .normal)
         self.buttonShare.addTarget(self, action: #selector(handleShare), for: .touchUpInside)
         self.view.addSubview(self.buttonShare)
     }
-    func createPickerView() {
-        self.pickerView = UIPickerView(frame: CGRect(x: 50, y: 100, width: 300, height: 30))
-        self.pickerView.delegate = self
-        self.pickerView.dataSource = self
-        self.textField.inputView = pickerView
-    }
+
     func showActivityVC() {
         self.activityViewController = UIActivityViewController(activityItems: [self.textField.text ?? ""],
                                                                applicationActivities: nil)
@@ -67,12 +68,16 @@ extension UIViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return 1
     }
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 1
+        return 3
     }
     public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if row == 3 {
-    
-        }
         return "\(row)"
+    }
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if row == 2 {
+            let activityViewController = UIActivityViewController(activityItems: ["Вы делитесь индексом №\(row)"],
+                                                                applicationActivities: nil)
+            self.present(activityViewController, animated: true)
+        }
     }
 }
