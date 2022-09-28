@@ -12,6 +12,8 @@ class PizzaViewController: UIViewController {
        let button = UIButton(frame: CGRect(x: 335, y: 160, width: 40, height: 40))
         button.backgroundColor = .systemOrange
         button.layer.cornerRadius = 10
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.imageView?.tintColor = .white
         button.tag = 1
         return button
     }()
@@ -30,6 +32,8 @@ class PizzaViewController: UIViewController {
        let button = UIButton(frame: CGRect(x: 335, y: 320, width: 40, height: 40))
         button.backgroundColor = .systemOrange
         button.layer.cornerRadius = 10
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.imageView?.tintColor = .white
         button.tag = 2
         return button
     }()
@@ -48,6 +52,8 @@ class PizzaViewController: UIViewController {
        let button = UIButton(frame: CGRect(x: 335, y: 480, width: 40, height: 40))
         button.backgroundColor = .systemOrange
         button.layer.cornerRadius = 10
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.imageView?.tintColor = .white
         button.tag = 3
         return button
     }()
@@ -82,7 +88,6 @@ class PizzaViewController: UIViewController {
     }
     @objc func showIngredientsVC(sender: UIButton) {
         let ingredientsVC = IngredientsViewController()
-        ingredientsVC.modalPresentationStyle = .automatic
         switch sender.tag {
         case 1:
             ingredientsVC.pizzaName = "margarita"

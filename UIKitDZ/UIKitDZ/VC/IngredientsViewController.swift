@@ -85,12 +85,14 @@ class IngredientsViewController: UIViewController {
         view.addSubview(addOlivesSwitch)
         view.addSubview(chooseButton)
         
-        chooseButton.addTarget(self, action: #selector(showPaymentVC), for: .touchUpInside)
+        chooseButton.addTarget(self, action: #selector(showPaymentVCAction), for: .touchUpInside)
 
     }
-    @objc func showPaymentVC() {
+    @objc func showPaymentVCAction() {
         let paymentVC = PaymentViewController()
-        self.navigationController?.pushViewController(paymentVC, animated: true)
+        let navigationController = UINavigationController(rootViewController: paymentVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 
 }
