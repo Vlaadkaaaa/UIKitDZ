@@ -29,9 +29,9 @@ class ViewController: UIViewController {
     }
     func showNewVC(identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-              guard let vc = storyboard.instantiateViewController(
-                  withIdentifier: identifier) as? SecondViewController else {return}
-              self.present(vc, animated: true, completion: nil)
+        guard let vc = storyboard.instantiateViewController(
+            withIdentifier: identifier) as? SecondViewController else {return}
+        self.present(vc, animated: true, completion: nil)
     }
     
     func checkLogin(email: String, password: String) -> Bool {
