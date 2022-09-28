@@ -9,10 +9,7 @@ import Foundation
 /// Данная модель конвертирует введенный пользователем текст и возвращает его в измененном формате
 struct Words {
     func converting(text: String) -> String {
-        if text == "leohl" {
-            return "Hello"
-        } else {
-            return "Не знаю что за \(text)"
-        }
+        guard text == "leohl" else {return "Не знаю что за \(text)"}
+        return "Hello"
     }
 }

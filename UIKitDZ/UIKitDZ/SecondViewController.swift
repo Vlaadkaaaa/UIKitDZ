@@ -26,31 +26,31 @@ class SecondViewController: UIViewController {
         return button
     }()
     
-    private var model = Words()
+    private var words = Words()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addView()
-        startButton.addTarget(self, action: #selector(start), for: .allTouchEvents)
+        startButton.addTarget(self, action: #selector(startAction), for: .allTouchEvents)
     }
     
     func addView() {
-        self.view.backgroundColor = .systemYellow
-        self.view.addSubview(startButton)
-        self.view.addSubview(presentTextlabel)
+        view.backgroundColor = .systemYellow
+        view.addSubview(startButton)
+        view.addSubview(presentTextlabel)
     }
     
-    @objc func start(sender: UIButton) {
+    @objc func startAction(sender: UIButton) {
         let alert = UIAlertController(title: "Введите слово", message: "", preferredStyle: .alert)
         alert.addTextField()
-        let add = UIAlertAction(title: "Ok", style: .default) { _ in
-            self.presentTextlabel.text = self.model.converting(text: alert.textFields?.first?.text ?? "")
+        let alertAction = UIAlertAction(title: "Ok", style: .default) { _ in
+            self.presentTextlabel.text = self.words.converting(text: alert.textFields?.first?.text ?? "")
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-        alert.addAction(add)
+        alert.addAction(alertAction)
         alert.addAction(cancel)
         
-        self.present(alert, animated: true)
+        present(alert, animated: true)
     }
     
 }

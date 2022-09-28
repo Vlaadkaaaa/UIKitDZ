@@ -93,7 +93,7 @@ class ViewController: UIViewController {
                                                name: UIApplication.willEnterForegroundNotification,
                                                object: nil)
         sumNumberButton.addTarget(self, action: #selector(sumNumber), for: .allTouchEvents)
-        guessNumberButton.addTarget(self, action: #selector(guessNumber), for: .allTouchEvents)
+        guessNumberButton.addTarget(self, action: #selector(guessNumberAction), for: .allTouchEvents)
         showNewVC.addTarget(self, action: #selector(showVC), for: .allTouchEvents)
     }
     
@@ -128,7 +128,7 @@ class ViewController: UIViewController {
         alert.addTextField { textField in
             textField.placeholder = "Введите первое число типа Int"
         }
-        let add = UIAlertAction(title: "Add", style: .default) { _ in
+        let alertAddAction = UIAlertAction(title: "Add", style: .default) { _ in
             number1 = alert.textFields?.first?.text
             
             let alertTwo = UIAlertController(title: "Сложение чисел", message: "Добавьте число", preferredStyle: .alert)
@@ -145,11 +145,11 @@ class ViewController: UIViewController {
             self.present(alertTwo, animated: true)
             
         }
-        alert.addAction(add)
-        self.present(alert, animated: true)
+        alert.addAction(alertAddAction)
+        present(alert, animated: true)
         
     }
-    @objc func guessNumber(sender: UIButton) {
+    @objc func guessNumberAction(sender: UIButton) {
         let random = Int.random(in: 0...100)
         
         let alertController = UIAlertController(title: "Random", message: "Введите число", preferredStyle: .alert)
@@ -172,6 +172,6 @@ class ViewController: UIViewController {
         alertController.addAction(actionAdd)
         alertController.addAction(cancel)
         
-        self.present(alertController, animated: true)
+        present(alertController, animated: true)
     }
 }
