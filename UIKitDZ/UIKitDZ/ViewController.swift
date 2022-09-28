@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    //Переход к другому VC при помощи segue
+    // Переход к другому VC при помощи segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destination = segue.destination as? PlayerViewController else { return }
         if segue.identifier == "songOne" {

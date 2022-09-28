@@ -31,21 +31,21 @@ class PlayerViewController: UIViewController {
         playSong()
         
         timer = Timer.scheduledTimer(timeInterval: 1,
-                                     target: self, selector: #selector(updateTime),
+                                     target: self, selector: #selector(updateTimeAction),
                                      userInfo: nil, repeats: true)
     }
     
     // MARK: - Public Methods
-    @objc func updateTime() {
-        self.changeTimeSongSliderOutlet.value = Float(player.currentTime)
+    @objc func updateTimeAction() {
+        changeTimeSongSliderOutlet.value = Float(player.currentTime)
         let currentTime = player.currentTime
         let min = Int(currentTime / 60)
         let sec = Int(currentTime.truncatingRemainder(dividingBy: 60))
-        self.timeStartLabel.text = NSString(format: "%02d:%02d", min, sec) as String
+        timeStartLabel.text = NSString(format: "%02d:%02d", min, sec) as String
         let endTime = player.currentTime - player.duration
         let endMin = Int(endTime / 60)
         let endSec = Int(-endTime.truncatingRemainder(dividingBy: 60))
-        self.timeEndLabel.text = NSString(format: "%02d:%02d", endMin, endSec) as String
+        timeEndLabel.text = NSString(format: "%02d:%02d", endMin, endSec) as String
     }
     func playSong() {
         do {
@@ -69,14 +69,13 @@ class PlayerViewController: UIViewController {
     
     // MARK: - IBAction
     @IBAction func playOrPauseAction(_ sender: Any) {
-        if player.isPlaying {
-            player.stop()
-            playOrPauseOutlet.setImage(UIImage(named: "play"), for: .normal)
-        } else {
+        guard player.isPlaying else {
             player.play()
             playOrPauseOutlet.setImage(UIImage(named: "pause"), for: .normal)
-            
+            return
         }
+            player.stop()
+            playOrPauseOutlet.setImage(UIImage(named: "play"), for: .normal)
     }
     @IBAction func changeTimeSongSliderAction(_ sender: Any) {
         player.currentTime = TimeInterval(changeTimeSongSliderOutlet.value)
@@ -84,10 +83,4 @@ class PlayerViewController: UIViewController {
     @IBAction func changeVolumeSliderAction(_ sender: Any) {
         player.volume =  changeVolumeSliderOutlet.value
     }
-    @IBAction func backTrackAction(_ sender: Any) {
-    }
-    
-    @IBAction func nextTrackAction(_ sender: Any) {
-    }
-    
 }
