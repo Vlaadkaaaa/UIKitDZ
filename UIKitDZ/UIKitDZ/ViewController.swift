@@ -9,48 +9,43 @@ import UIKit
 
 ///
 class ViewController: UIViewController {
-    var buttonShare = UIButton()
-    var textField = UITextField()
-    
+
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var defaultTextLabel: UILabel!
     @IBOutlet weak var defaultLabelTextTwo: UILabel!
     
+    var buttonShare = UIButton()
+    var textField = UITextField()
     var activityViewController: UIActivityViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        defaultTextLabel.textColor = .systemBlue
-        defaultLabelTextTwo.textColor = .systemBlue
-        self.pickerView.delegate = self
-        self.pickerView.dataSource = self
-        createTextField()
-        createButton()
+        showViewElementsAndAction()
     }
     
     // MARK: - Method
     func createTextField() {
-        self.textField.frame = CGRect(x: 0, y: 0, width: 200, height: 30)
-        self.textField.center = self.view.center
-        self.textField.borderStyle = .roundedRect
-        self.textField.placeholder = "Enter text to share"
-        self.view.addSubview(textField)
+        textField.frame = CGRect(x: 0, y: 0, width: 200, height: 30)
+        textField.center = self.view.center
+        textField.borderStyle = .roundedRect
+        textField.placeholder = "Enter text to share"
+        view.addSubview(textField)
     }
     func createButton() {
-        self.buttonShare = UIButton(type: .roundedRect)
-        self.buttonShare.frame = CGRect(x: 50, y: 500, width: 290, height: 44)
-        self.buttonShare.setTitle("Расшарить", for: .normal)
-        self.buttonShare.addTarget(self, action: #selector(handleShare), for: .touchUpInside)
-        self.view.addSubview(self.buttonShare)
+        buttonShare = UIButton(type: .roundedRect)
+        buttonShare.frame = CGRect(x: 50, y: 500, width: 290, height: 44)
+        buttonShare.setTitle("Расшарить", for: .normal)
+        buttonShare.addTarget(self, action: #selector(handleShareAction), for: .touchUpInside)
+        view.addSubview(buttonShare)
     }
 
     func showActivityVC() {
-        self.activityViewController = UIActivityViewController(activityItems: [self.textField.text ?? ""],
+        activityViewController = UIActivityViewController(activityItems: [textField.text ?? ""],
                                                                applicationActivities: nil)
-        guard let activityViewController = self.activityViewController else {return}
-        self.present(activityViewController, animated: true)
+        guard let activityViewController = activityViewController else { return }
+        present(activityViewController, animated: true)
     }
-    @objc func handleShare(paramSender: Any) {
+    @objc func handleShareAction(paramSender: Any) {
         let text = self.textField.text
         if text?.count == 0 {
             let message = "Сначала введите текст потом нажмите кнопку"
@@ -61,8 +56,16 @@ class ViewController: UIViewController {
         }
         showActivityVC()
     }
+    private func showViewElementsAndAction() {
+        defaultTextLabel.textColor = .systemBlue
+        defaultLabelTextTwo.textColor = .systemBlue
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        createTextField()
+        createButton()
+    }
 }
-
+/// UIPickerViewDelegate, UIPickerViewDataSource
 extension UIViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
