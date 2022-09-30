@@ -6,10 +6,14 @@
 //
 
 import UIKit
-///
-class IngredientsViewController: UIViewController {
+/// Protocol
+protocol PopToRootVCDelegate: AnyObject {
+    func goTOBack()
+}
+/// Данный класс позволяет добавить доп. ингридиенты к пицце
+final class IngredientsViewController: UIViewController {
     var namePizzalabel: UILabel {
-       let label = UILabel(frame: CGRect(x: 20, y: 20, width: 350, height: 40))
+        let label = UILabel(frame: CGRect(x: 20, y: 20, width: 350, height: 40))
         label.textAlignment = .center
         label.text = pizzaName.capitalized
         label.font = .systemFont(ofSize: 40)
@@ -21,43 +25,43 @@ class IngredientsViewController: UIViewController {
         return image
     }
     let addChessLabel: UILabel = {
-       let label =  UILabel(frame: CGRect(x: 43, y: 450, width: 150, height: 30))
+        let label =  UILabel(frame: CGRect(x: 43, y: 450, width: 150, height: 30))
         label.text = "Сыр моццарела"
         label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
     let addChessSwitch: UISwitch = {
-       let addSwitch = UISwitch(frame: CGRect(x: 300, y: 450, width: 0, height: 0))
+        let addSwitch = UISwitch(frame: CGRect(x: 300, y: 450, width: 0, height: 0))
         return addSwitch
     }()
     let addHamLabel: UILabel = {
-       let label =  UILabel(frame: CGRect(x: 43, y: 500, width: 150, height: 30))
+        let label =  UILabel(frame: CGRect(x: 43, y: 500, width: 150, height: 30))
         label.text = "Ветчина"
         label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
     let addHamSwitch: UISwitch = {
-       let addSwitch = UISwitch(frame: CGRect(x: 300, y: 500, width: 0, height: 0))
+        let addSwitch = UISwitch(frame: CGRect(x: 300, y: 500, width: 0, height: 0))
         return addSwitch
     }()
     let addFungusLabel: UILabel = {
-       let label =  UILabel(frame: CGRect(x: 43, y: 550, width: 150, height: 30))
+        let label =  UILabel(frame: CGRect(x: 43, y: 550, width: 150, height: 30))
         label.text = "Грибы"
         label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
     let addFungusSwitch: UISwitch = {
-       let addSwitch = UISwitch(frame: CGRect(x: 300, y: 550, width: 0, height: 0))
+        let addSwitch = UISwitch(frame: CGRect(x: 300, y: 550, width: 0, height: 0))
         return addSwitch
     }()
     let addOlivesLabel: UILabel = {
-       let label =  UILabel(frame: CGRect(x: 43, y: 600, width: 150, height: 30))
+        let label =  UILabel(frame: CGRect(x: 43, y: 600, width: 150, height: 30))
         label.text = "Маслины"
         label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
     let addOlivesSwitch: UISwitch = {
-       let addSwitch = UISwitch(frame: CGRect(x: 300, y: 600, width: 0, height: 0))
+        let addSwitch = UISwitch(frame: CGRect(x: 300, y: 600, width: 0, height: 0))
         return addSwitch
     }()
     let chooseButton: UIButton = {
@@ -69,9 +73,26 @@ class IngredientsViewController: UIViewController {
     }()
     
     var pizzaName = String()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addViewElementsAndAction()
+    }
+
+    @objc func showPaymentVCAction() {
+        let paymentVC = PaymentViewController()
+        paymentVC.delegate = self
+        paymentVC.pizzaNameLabel = pizzaName
+        paymentVC.isAddChessBool = addChessSwitch.isOn
+        paymentVC.isAddHamBool = addHamSwitch.isOn
+        paymentVC.isAddFungusBool = addFungusSwitch.isOn
+        paymentVC.isAddOlives = addOlivesSwitch.isOn
+        
+        let navigationController = UINavigationController(rootViewController: paymentVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: false)
+    }
+    private func addViewElementsAndAction() {
         view.backgroundColor = .white
         view.addSubview(namePizzalabel)
         view.addSubview(imagePizza)
@@ -85,14 +106,16 @@ class IngredientsViewController: UIViewController {
         view.addSubview(addOlivesSwitch)
         view.addSubview(chooseButton)
         
-        chooseButton.addTarget(self, action: #selector(showPaymentVCAction), for: .touchUpInside)
-
+        chooseButton.addTarget(self, action: #selector(showPaymentVCAction),
+                               for: .touchUpInside)
     }
-    @objc func showPaymentVCAction() {
-        let paymentVC = PaymentViewController()
-        let navigationController = UINavigationController(rootViewController: paymentVC)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true)
-    }
+}
 
+extension IngredientsViewController: PopToRootVCDelegate {
+    func goTOBack() {
+        guard let vc = self.presentingViewController as? UINavigationController else { return }
+        view.isHidden = true
+        dismiss(animated: false)
+        vc.popViewController(animated: false)
+    }
 }

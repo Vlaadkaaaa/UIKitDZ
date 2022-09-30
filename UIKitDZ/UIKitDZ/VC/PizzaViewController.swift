@@ -6,10 +6,10 @@
 //
 
 import UIKit
-///
-class PizzaViewController: UIViewController {
+/// В данном классе представлен список имеющихся пицц
+final class PizzaViewController: UIViewController {
     var margaritaPizzaButton: UIButton = {
-       let button = UIButton(frame: CGRect(x: 335, y: 160, width: 40, height: 40))
+        let button = UIButton(frame: CGRect(x: 335, y: 160, width: 40, height: 40))
         button.backgroundColor = .systemOrange
         button.layer.cornerRadius = 10
         button.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -29,7 +29,7 @@ class PizzaViewController: UIViewController {
         return label
     }()
     var peperoniPizzaButton: UIButton = {
-       let button = UIButton(frame: CGRect(x: 335, y: 320, width: 40, height: 40))
+        let button = UIButton(frame: CGRect(x: 335, y: 320, width: 40, height: 40))
         button.backgroundColor = .systemOrange
         button.layer.cornerRadius = 10
         button.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -49,7 +49,7 @@ class PizzaViewController: UIViewController {
         return label
     }()
     var arrivaPizzaButton: UIButton = {
-       let button = UIButton(frame: CGRect(x: 335, y: 480, width: 40, height: 40))
+        let button = UIButton(frame: CGRect(x: 335, y: 480, width: 40, height: 40))
         button.backgroundColor = .systemOrange
         button.layer.cornerRadius = 10
         button.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -71,22 +71,10 @@ class PizzaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Pizza"
-        view.addSubview(margaritaPizzaButton)
-        view.addSubview(margaritaPizzaImage)
-        view.addSubview(margaritaPizzaLabel)
-        view.addSubview(peperoniPizzaImage)
-        view.addSubview(peperoniPizzaLabel)
-        view.addSubview(peperoniPizzaButton)
-        view.addSubview(arrivaPizzaImage)
-        view.addSubview(arrivaPizzaLabel)
-        view.addSubview(arrivaPizzaButton)
-        
-        margaritaPizzaButton.addTarget(self, action: #selector(showIngredientsVC), for: .touchUpInside)
-        peperoniPizzaButton.addTarget(self, action: #selector(showIngredientsVC), for: .touchUpInside)
-        arrivaPizzaButton.addTarget(self, action: #selector(showIngredientsVC), for: .touchUpInside)
+        addViewElementsAndAction()
     }
-    @objc func showIngredientsVC(sender: UIButton) {
+    
+    @objc func showIngredientsVCAction(sender: UIButton) {
         let ingredientsVC = IngredientsViewController()
         switch sender.tag {
         case 1:
@@ -99,5 +87,21 @@ class PizzaViewController: UIViewController {
         }
         present(ingredientsVC, animated: true)
     }
-
+    private func addViewElementsAndAction() {
+        title = "Pizza"
+        view.addSubview(margaritaPizzaButton)
+        view.addSubview(margaritaPizzaImage)
+        view.addSubview(margaritaPizzaLabel)
+        view.addSubview(peperoniPizzaImage)
+        view.addSubview(peperoniPizzaLabel)
+        view.addSubview(peperoniPizzaButton)
+        view.addSubview(arrivaPizzaImage)
+        view.addSubview(arrivaPizzaLabel)
+        view.addSubview(arrivaPizzaButton)
+        
+        margaritaPizzaButton.addTarget(self, action: #selector(showIngredientsVCAction), for: .touchUpInside)
+        peperoniPizzaButton.addTarget(self, action: #selector(showIngredientsVCAction), for: .touchUpInside)
+        arrivaPizzaButton.addTarget(self, action: #selector(showIngredientsVCAction), for: .touchUpInside)
+    }
+    
 }

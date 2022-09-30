@@ -6,8 +6,8 @@
 //
 
 import UIKit
-///
-class MenuViewController: UIViewController {
+/// В данном классе отображается меню заведения
+final class MenuViewController: UIViewController {
     
     var pizzaButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 10, y: 150, width: 370, height: 100))
@@ -29,14 +29,29 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Food"
-        view.addSubview(pizzaButton)
-        view.addSubview(sushiButton)
-        pizzaButton.addTarget(self, action: #selector(showNewVCAction), for: .touchUpInside)
+        addViewElementsAndAction()
     }
-    
+    @objc func supportAllertAction() {
+        let alertController = UIAlertController(title: "Здравствуйте",
+                                                message: "Наш номер для ваших вопросов: 8999999999",
+                                                preferredStyle: .alert)
+        let alertOkAction = UIAlertAction(title: "Ok", style: .cancel)
+        alertController.addAction(alertOkAction)
+        present(alertController, animated: true)
+    }
     @objc func showNewVCAction() {
         let pizzaVC = PizzaViewController()
         self.navigationController?.pushViewController(pizzaVC, animated: true)
+    }
+    private func addViewElementsAndAction() {
+        self.title = "Food"
+        view.backgroundColor = .white
+        view.addSubview(pizzaButton)
+        view.addSubview(sushiButton)
+        pizzaButton.addTarget(self, action: #selector(showNewVCAction), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem:
+                .compose,
+                                                            target: self,
+                                                            action: #selector(supportAllertAction))
     }
 }

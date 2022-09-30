@@ -7,8 +7,8 @@
 
 import UIKit
 
-/// Данный VC отвечает за окно входа в приложение
-class ViewController: UIViewController {
+/// Данный класс отвечает за окно входа в приложение
+final class RegistrationViewController: UIViewController {
     
     let logoView: UIView = {
         let view = UIView(frame: CGRect(x: 90, y: 80, width: 210, height: 100))
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
     var eyeButton: UIButton {
        let button = UIButton(frame: CGRect(x: 320, y: 430, width: 30, height: 30))
         button.setImage(UIImage(systemName: "eye"), for: .normal)
-        button.addTarget(self, action: #selector(showSecretPassword), for: .allTouchEvents)
+        button.addTarget(self, action: #selector(showSecretPasswordAction), for: .touchUpInside)
         return button
     }
     let signInButton: UIButton = {
@@ -78,10 +78,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showViewElements()
+       addViewElementsAndAction()
     }
     
-    func showViewElements() {
+    @objc func showSecretPasswordAction() {
+        guard passwordTextField.isSecureTextEntry else { return passwordTextField.isSecureTextEntry = true }
+        passwordTextField.isSecureTextEntry = false
+    }
+    @objc func showNewVCAction() {
+        let menuVC = MenuViewController()
+        let navigationController = UINavigationController(rootViewController: menuVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
+    }
+    private func addViewElementsAndAction() {
         view.addSubview(signInLabel)
         view.addSubview(logoView)
         view.addSubview(logoLabel)
@@ -93,14 +103,5 @@ class ViewController: UIViewController {
         view.addSubview(eyeButton)
         
         signInButton.addTarget(self, action: #selector(showNewVCAction), for: .touchUpInside)
-
-    }
-    @objc func showSecretPassword() {
-        guard passwordTextField.isSecureTextEntry else { return passwordTextField.isSecureTextEntry = true }
-        passwordTextField.isSecureTextEntry = false
-    }
-    @objc func showNewVCAction() {
-        let menuVC = MenuViewController()
-        self.navigationController?.pushViewController(menuVC, animated: true)
     }
 }
