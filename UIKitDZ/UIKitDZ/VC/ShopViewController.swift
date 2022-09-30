@@ -20,7 +20,7 @@ class ShopViewController: UIViewController {
         let backSwitch = UISwitch(frame: CGRect(x: 320, y: 30, width: 0, height: 0))
         backSwitch.onTintColor = .white
         backSwitch.isOn = false
-        backSwitch.addTarget(self, action: #selector(reverseBacgroundColor), for: .valueChanged)
+        backSwitch.addTarget(self, action: #selector(reverseBacgroundColorAction), for: .valueChanged)
         return backSwitch
     }
     let textLabel: UILabel = {
@@ -52,7 +52,7 @@ class ShopViewController: UIViewController {
         segmentedControl.frame = CGRect(x: 95, y: 485, width: 200, height: 30)
         return segmentedControl
     }
-    var buyAction: UIButton = {
+    var buyButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 30, y: 570, width: 330, height: 40))
         button.backgroundColor = .systemRed
         button.setTitle("Купить", for: .normal)
@@ -60,59 +60,62 @@ class ShopViewController: UIViewController {
         return button
     }()
     
-    let sneakersArray = [UIImage(named: "walker"),
+    let sneakers = [UIImage(named: "walker"),
                          UIImage(named: "trainer"),
                          UIImage(named: "runner")]
-    var userDataArray = [(name: String, size: Int)]()
+    var userData = [(name: String, size: Int)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(logoLabel)
-        self.view.addSubview(textLabel)
-        self.view.addSubview(backgroundSwitch)
-        self.view.addSubview(borderView)
-        self.view.addSubview(imageView)
-        self.view.addSubview(nameSegmentedControl)
-        self.view.addSubview(sizeSegmentedControl)
-        self.view.addSubview(buyAction)
-        
-        nameSegmentedControl.addTarget(self, action: #selector(changeImageSneakers), for: .valueChanged)
-        buyAction.addTarget(self, action: #selector(showBasketVC), for: .allTouchEvents)
+        showViewElementsAndAction()
     }
-    @objc func reverseBacgroundColor(target: UISwitch) {
+
+    @objc func reverseBacgroundColorAction(target: UISwitch) {
         if target.isOn {
-            self.view.backgroundColor = .black
-            self.textLabel.textColor = .white
-            self.nameSegmentedControl.backgroundColor = .white
-            self.sizeSegmentedControl.backgroundColor = .white
+            view.backgroundColor = .black
+            textLabel.textColor = .white
+            nameSegmentedControl.backgroundColor = .white
+            sizeSegmentedControl.backgroundColor = .white
         } else {
-            self.view.backgroundColor = .white
-            self.textLabel.textColor = .black
+            view.backgroundColor = .white
+            textLabel.textColor = .black
         }
     }
-    @objc func changeImageSneakers(target: UISegmentedControl) {
+    @objc func changeImageSneakersAction(target: UISegmentedControl) {
         if target == self.nameSegmentedControl {
             let segmentedIndex = target.selectedSegmentIndex
-            self.imageView.image = self.sneakersArray[segmentedIndex]
+            imageView.image = self.sneakers[segmentedIndex]
             guard let name = target.titleForSegment(at: segmentedIndex) else { return }
             let size = sizeSegmentedControl.selectedSegmentIndex + 41
-            if !userDataArray.isEmpty {
-                userDataArray = [(name: String, size: Int)]()
-                userDataArray.append((name: name, size: size))
+            if !userData.isEmpty {
+                userData = [(name: String, size: Int)]()
+                userData.append((name: name, size: size))
             } else {
-                userDataArray.append((name: name, size: size))
+                userData.append((name: name, size: size))
             }
         }
     }
-    @objc func showBasketVC() {
+    @objc func showBasketVCAction() {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyBoard.instantiateViewController(
             withIdentifier: "basketVC") as? BasketViewController else { return }
-        guard let name = userDataArray.first?.name else {return}
-        guard let size = userDataArray.first?.size else {return}
+        guard let name = userData.first?.name else {return}
+        guard let size = userData.first?.size else {return}
         vc.nameSneakers = name
         vc.sizeSnikers = size
-        print(size)
         self.present(vc, animated: true, completion: nil)
+    }
+    private func showViewElementsAndAction() {
+        view.addSubview(logoLabel)
+        view.addSubview(textLabel)
+        view.addSubview(backgroundSwitch)
+        view.addSubview(borderView)
+        view.addSubview(imageView)
+        view.addSubview(nameSegmentedControl)
+        view.addSubview(sizeSegmentedControl)
+        view.addSubview(buyButton)
+        
+        nameSegmentedControl.addTarget(self, action: #selector(changeImageSneakersAction), for: .valueChanged)
+        buyButton.addTarget(self, action: #selector(showBasketVCAction), for: .allTouchEvents)
     }
 }

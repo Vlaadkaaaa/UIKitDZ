@@ -6,7 +6,7 @@
 //
 
 import UIKit
-///
+/// Данный VC предназначет для создания корзины в интернет магазине
 class BasketViewController: UIViewController {
     
     var logoLabel: UILabel = {
@@ -16,7 +16,7 @@ class BasketViewController: UIViewController {
         label.font = .boldSystemFont(ofSize: 22)
         return label
     }()
-    let chooseSneakersLogo: UILabel = {
+    let chooseSneakersLogoLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 30, y: 90, width: 330, height: 20))
         label.text = "Сегодня вы заказали"
         label.textAlignment = .center
@@ -43,7 +43,7 @@ class BasketViewController: UIViewController {
         let label = UILabel(frame: CGRect(x: 30, y: 290, width: 100, height: 20))
         return label
     }()
-    var imageSneakers: UIImageView {
+    var imageSneakersView: UIImageView {
         let image = UIImageView(frame: CGRect(x: 95, y: 400, width: 200, height: 235))
         image.image = UIImage(named: nameSneakers)
         return image
@@ -61,12 +61,12 @@ class BasketViewController: UIViewController {
 }
 extension BasketViewController {
     func addNewViewElement() {
-        self.view.addSubview(logoLabel)
-        self.view.addSubview(chooseSneakersLogo)
-        self.view.addSubview(nameSneakersLabel)
-        self.view.addSubview(nameChooseSneakersLabel)
-        self.view.addSubview(sizeSneakersLabel)
-        self.view.addSubview(sizeChooseSneakersLabel)
-        self.view.addSubview(imageSneakers)
+        view.addSubview(logoLabel)
+        view.addSubview(chooseSneakersLogoLabel)
+        view.addSubview(nameSneakersLabel)
+        view.addSubview(nameChooseSneakersLabel)
+        view.addSubview(sizeSneakersLabel)
+        view.addSubview(sizeChooseSneakersLabel)
+        view.addSubview(imageSneakersView)
     }
 }

@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         button.setTitle("Leeet's go", for: .normal)
         button.backgroundColor = UIColor(red: 152/255, green: 245/255, blue: 217/255, alpha: 1.0)
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(showNewVC), for: .allEvents)
+        button.addTarget(self, action: #selector(showNewVCAction), for: .allEvents)
         return button
     }
     var imageView: UIImageView = {
@@ -58,32 +58,32 @@ class ViewController: UIViewController {
     }()
     
     var menuArray = ["one", "two", "three"]
-    let imageArray = [UIImage(named: "runner"),
+    let images = [UIImage(named: "runner"),
                       UIImage(named: "trainer"),
                       UIImage(named: "walker")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
+        view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
         showView()
       
     }
-    @objc func showNewVC() {
+    @objc func showNewVCAction() {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyBoard.instantiateViewController(
             withIdentifier: "shopVC") as? ShopViewController else { return }
-        self.present(vc, animated: true, completion: nil)
+        present(vc, animated: true, completion: nil)
     }
 }
 
 extension ViewController {
     func showView() {
-        self.view.addSubview(logoLabel)
-        self.view.addSubview(loginLabel)
-        self.view.addSubview(loginTextField)
-        self.view.addSubview(passwordLabel)
-        self.view.addSubview(passwordTextField)
-        self.view.addSubview(signInAction)
-        self.view.addSubview(imageView)
+        view.addSubview(logoLabel)
+        view.addSubview(loginLabel)
+        view.addSubview(loginTextField)
+        view.addSubview(passwordLabel)
+        view.addSubview(passwordTextField)
+        view.addSubview(signInAction)
+        view.addSubview(imageView)
     }
 }
