@@ -8,9 +8,10 @@
 import UIKit
 
 ///
-class ViewController: UIViewController {
+class WorldClockViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
 }
