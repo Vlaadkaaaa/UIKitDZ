@@ -6,29 +6,25 @@
 //
 
 import UIKit
-///
-class AddAlarmViewController: UIViewController {
-
+/// Добавление/Редактирование будильника
+final class AddAlarmViewController: UIViewController {
+    
     @IBOutlet weak var viewOutlet: UIView!
     @IBOutlet weak var timePickerViewOutlet: UIDatePicker!
     @IBOutlet weak var addNameAlarmTextField: UITextField!
     
     weak var delegate: AlarmViewControllerDelegate?
-    let timeStartFormatter = DateFormatter()
-    var date = String()
-
+    private let timeStartFormatter = DateFormatter()
+    private var date = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        timePickerViewOutlet.setValue(UIColor.white, forKeyPath: "textColor")
-      
-        viewOutlet.layer.cornerRadius = 20
-        title = "Add Alarm"
-        navigationItem.rightBarButtonItem?.tintColor = .systemOrange
+        showNewViewElement()
     }
     
     @IBAction func saveAction(_ sender: Any) {
         timeStartFormatter.dateFormat = "HH:mm"
-         date = timeStartFormatter.string(from: timePickerViewOutlet.date)
+        date = timeStartFormatter.string(from: timePickerViewOutlet.date)
         print(date)
         
         delegate?.update(alarmTime: "\(date)",
@@ -37,5 +33,11 @@ class AddAlarmViewController: UIViewController {
     }
     @IBAction func cancelAction(_ sender: Any) {
         dismiss(animated: true)
+    }
+    private func showNewViewElement() {
+        timePickerViewOutlet.setValue(UIColor.white, forKeyPath: "textColor")
+        viewOutlet.layer.cornerRadius = 20
+        title = "Add Alarm"
+        navigationItem.rightBarButtonItem?.tintColor = .systemOrange
     }
 }

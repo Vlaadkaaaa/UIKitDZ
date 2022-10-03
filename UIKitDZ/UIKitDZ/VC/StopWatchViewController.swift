@@ -6,13 +6,12 @@
 //
 
 import UIKit
-///
-class StopWatchViewController: UIViewController {
+/// Секундомер
+final class StopWatchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
 
 }

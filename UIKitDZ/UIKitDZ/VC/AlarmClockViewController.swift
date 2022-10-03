@@ -10,14 +10,12 @@ import UIKit
 protocol AlarmViewControllerDelegate: AnyObject {
     func update(alarmTime: String, alarmName: String)
 }
-///
-class AlarmClockViewController: UIViewController {
+/// Активация/Добавление будильника
+final class AlarmClockViewController: UIViewController {
     
     @IBOutlet weak var settingsOutlet: UIButton!
     @IBOutlet weak var alarmOneOutlet: UIButton!
-    
     @IBOutlet weak var oneAlarmTimeOutlet: UILabel!
-    
     @IBOutlet weak var twoAlarmTimeOutlet: UILabel!
     @IBOutlet weak var threeAlarmTimeOutlet: UILabel!
     @IBOutlet weak var editAlarmOutlet: UIBarButtonItem!
@@ -26,7 +24,6 @@ class AlarmClockViewController: UIViewController {
     @IBOutlet weak var fourAlarmTimeOutlet: UILabel!
     @IBOutlet weak var nameAlarmFourLabel: UILabel!
     @IBOutlet weak var fourAlarmSwitchOutlet: UISwitch!
-    
     @IBOutlet weak var fourAlarmView: UIView!
     
     override func viewDidLoad() {
@@ -36,6 +33,11 @@ class AlarmClockViewController: UIViewController {
         isHiddenNewAlarm(isValue: true)
         
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destination = segue.destination as? AddAlarmViewController else { return }
+        destination.delegate = self
+    }
+    
     @IBAction func editAlarmAction(_ sender: Any) {
         if alarmOneOutlet.isEnabled {
             editAlarmOutlet.title = "Править"
@@ -71,10 +73,6 @@ class AlarmClockViewController: UIViewController {
         fourAlarmTimeOutlet.isHidden = isValue
         fourAlarmSwitchOutlet.isHidden = isValue
         fourAlarmView.isHidden = isValue
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? AddAlarmViewController else { return }
-        destination.delegate = self
     }
 }
 extension AlarmClockViewController: AlarmViewControllerDelegate {
