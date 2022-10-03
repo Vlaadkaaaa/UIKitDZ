@@ -10,7 +10,7 @@ import UIKit
 protocol PopToRootVCDelegate: AnyObject {
     func goTOBack()
 }
-/// Данный класс позволяет добавить доп. ингридиенты к пицце
+/// Доп. ингридиенты к пицце
 final class IngredientsViewController: UIViewController {
     var namePizzalabel: UILabel {
         let label = UILabel(frame: CGRect(x: 20, y: 20, width: 350, height: 40))

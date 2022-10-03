@@ -6,7 +6,7 @@
 //
 
 import UIKit
-/// Данный класс необходим для оплаты заказа
+/// Оплата заказа
 final class PaymentViewController: UIViewController {
     
     let orderUserLabel: UILabel = {
@@ -17,7 +17,7 @@ final class PaymentViewController: UIViewController {
     }()
     var namePizzaLabel: UILabel {
         let label = UILabel(frame: CGRect(x: 30, y: 160, width: 300, height: 40))
-        label.text = pizzaNameLabel?.capitalized
+        label.text = pizzaName?.capitalized
         label.font = .boldSystemFont(ofSize: 30)
         return label
     }
@@ -84,10 +84,10 @@ final class PaymentViewController: UIViewController {
         button.layer.cornerRadius = 5
         return button
     }()
-    var pizzaNameLabel: String?
-    var isAddChessBool: Bool?
-    var isAddHamBool: Bool?
-    var isAddFungusBool: Bool?
+    var pizzaName: String?
+    var isAddChess: Bool?
+    var isAddHam: Bool?
+    var isAddFungus: Bool?
     var isAddOlives: Bool?
     
     weak var delegate: PopToRootVCDelegate?
@@ -171,13 +171,13 @@ extension PaymentViewController {
         }
     }
     func presentExstrasIngredients() {
-        if isAddChessBool ?? false {
+        if isAddChess ?? false {
             checkIsEmptyLabel(text: "Сыр моццарела")
         }
-        if isAddHamBool ?? false {
+        if isAddHam ?? false {
             checkIsEmptyLabel(text: "Ветчина")
         }
-        if isAddFungusBool ?? false {
+        if isAddFungus ?? false {
             checkIsEmptyLabel(text: "Грибы")
         }
         if isAddOlives ?? false {

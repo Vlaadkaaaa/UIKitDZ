@@ -6,7 +6,7 @@
 //
 
 import UIKit
-/// В данном классе отображается меню заведения
+/// Меню заведения
 final class MenuViewController: UIViewController {
     
     var pizzaButton: UIButton = {
@@ -31,6 +31,7 @@ final class MenuViewController: UIViewController {
         super.viewDidLoad()
         addViewElementsAndAction()
     }
+    
     @objc func supportAllertAction() {
         let alertController = UIAlertController(title: "Здравствуйте",
                                                 message: "Наш номер для ваших вопросов: 8999999999",
@@ -39,10 +40,12 @@ final class MenuViewController: UIViewController {
         alertController.addAction(alertOkAction)
         present(alertController, animated: true)
     }
+    
     @objc func showNewVCAction() {
         let pizzaVC = PizzaViewController()
         self.navigationController?.pushViewController(pizzaVC, animated: true)
     }
+    
     private func addViewElementsAndAction() {
         self.title = "Food"
         view.backgroundColor = .white

@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// Данный класс отвечает за окно входа в приложение
+/// Вход в приложение
 final class RegistrationViewController: UIViewController {
     
     let logoView: UIView = {

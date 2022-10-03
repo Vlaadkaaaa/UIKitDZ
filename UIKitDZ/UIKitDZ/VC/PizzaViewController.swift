@@ -6,7 +6,7 @@
 //
 
 import UIKit
-/// В данном классе представлен список имеющихся пицц
+/// Список пицц
 final class PizzaViewController: UIViewController {
     var margaritaPizzaButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 335, y: 160, width: 40, height: 40))
