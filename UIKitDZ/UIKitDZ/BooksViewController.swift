@@ -7,7 +7,7 @@
 
 import UIKit
 /// Список книг в библиотеке 
-class BooksViewController: UIViewController {
+final class BooksViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
