@@ -9,10 +9,11 @@ import UIKit
 /// Создание/редактирование таймера
 final class TimerViewController: UIViewController {
     
-    @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var timerPickerView: UIPickerView!
-    @IBOutlet weak var editSongButton: UIButton!
+    // MARK - Private Visual Component
+    @IBOutlet private weak var startButton: UIButton!
+    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var timerPickerView: UIPickerView!
+    @IBOutlet private weak var editSongButton: UIButton!
     
     private var hour = 0
     private var minutes = 0
@@ -22,6 +23,8 @@ final class TimerViewController: UIViewController {
         super.viewDidLoad()
         showNewVCElementAndAction()
     }
+    
+    // MARK: - Private Method
     private func showNewVCElementAndAction() {
         startButton.layer.cornerRadius = startButton.frame.height / 2
         cancelButton.layer.cornerRadius = cancelButton.frame.height / 2

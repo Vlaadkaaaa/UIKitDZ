@@ -6,38 +6,38 @@
 //
 
 import UIKit
-///
+/// Protocol
 protocol AlarmViewControllerDelegate: AnyObject {
     func update(alarmTime: String, alarmName: String)
 }
 /// Активация/Добавление будильника
 final class AlarmClockViewController: UIViewController {
     
-    @IBOutlet weak var settingsOutlet: UIButton!
-    @IBOutlet weak var alarmOneOutlet: UIButton!
-    @IBOutlet weak var oneAlarmTimeOutlet: UILabel!
-    @IBOutlet weak var twoAlarmTimeOutlet: UILabel!
-    @IBOutlet weak var threeAlarmTimeOutlet: UILabel!
-    @IBOutlet weak var editAlarmOutlet: UIBarButtonItem!
-    @IBOutlet weak var oneAlarmSwitchOutlet: UISwitch!
-    @IBOutlet weak var nameAlarmOneLabel: UILabel!
-    @IBOutlet weak var fourAlarmTimeOutlet: UILabel!
-    @IBOutlet weak var nameAlarmFourLabel: UILabel!
-    @IBOutlet weak var fourAlarmSwitchOutlet: UISwitch!
-    @IBOutlet weak var fourAlarmView: UIView!
+    // MARK: - Private Visual Component
+    @IBOutlet private weak var settingsOutlet: UIButton!
+    @IBOutlet private weak var alarmOneOutlet: UIButton!
+    @IBOutlet private weak var oneAlarmTimeOutlet: UILabel!
+    @IBOutlet private weak var twoAlarmTimeOutlet: UILabel!
+    @IBOutlet private weak var threeAlarmTimeOutlet: UILabel!
+    @IBOutlet private weak var editAlarmOutlet: UIBarButtonItem!
+    @IBOutlet private weak var oneAlarmSwitchOutlet: UISwitch!
+    @IBOutlet private weak var nameAlarmOneLabel: UILabel!
+    @IBOutlet private weak var fourAlarmTimeOutlet: UILabel!
+    @IBOutlet private weak var nameAlarmFourLabel: UILabel!
+    @IBOutlet private weak var fourAlarmSwitchOutlet: UISwitch!
+    @IBOutlet private weak var fourAlarmView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingsOutlet.layer.cornerRadius = 20
-        alarmOneOutlet.isEnabled = false
-        isHiddenNewAlarm(isValue: true)
-        
+        showViewElement()
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destination = segue.destination as? AddAlarmViewController else { return }
         destination.delegate = self
     }
     
+    // MARK: - IBAction
     @IBAction func editAlarmAction(_ sender: Any) {
         if alarmOneOutlet.isEnabled {
             editAlarmOutlet.title = "Править"
@@ -62,6 +62,14 @@ final class AlarmClockViewController: UIViewController {
             nameAlarmOneLabel.textColor = .systemGray
         }
     }
+    
+    // MARK: - Private Method
+    private func showViewElement() {
+        settingsOutlet.layer.cornerRadius = 20
+        alarmOneOutlet.isEnabled = false
+        isHiddenNewAlarm(isValue: true)
+    }
+    
     private func changeTime(color: UIColor) {
         oneAlarmTimeOutlet.textColor = color
         twoAlarmTimeOutlet.textColor = color
@@ -75,6 +83,8 @@ final class AlarmClockViewController: UIViewController {
         fourAlarmView.isHidden = isValue
     }
 }
+
+// MARK: - AlarmViewControllerDelegate
 extension AlarmClockViewController: AlarmViewControllerDelegate {
     func update(alarmTime: String, alarmName: String) {
         isHiddenNewAlarm(isValue: false)

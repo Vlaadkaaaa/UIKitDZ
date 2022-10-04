@@ -13,27 +13,4 @@ final class StopWatchViewController: UIViewController {
         super.viewDidLoad()
         
     }
-
 }
-
-// MARK: - IBOutlet
-
-// MARK: - Visual Components
-
-// MARK: - Public Properties
-
-// MARK: - Private Properties
-
-// MARK: - Initializers
-
-// MARK: - UIViewController (*)
-
-// MARK: - Public Methods
-
-// MARK: - IBAction
-
-// MARK: - Private Methods
-
-// MARK: - Types
-
-// MARK: - Constants
