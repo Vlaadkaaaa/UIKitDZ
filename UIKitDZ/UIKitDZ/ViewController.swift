@@ -19,7 +19,7 @@ final class ViewController: UIViewController {
         static let nameFonts = ["Arial", "Copperplate", "Georgia", "Zapfino"]
     }
     // MARK: - Visual Components
-    private var editBoldFontButton: UIButton {
+    private lazy var editBoldFontButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 25, y: 65, width: 30, height: 50))
         button.setTitle(Constants.titleBoldFont, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 40)
@@ -27,8 +27,8 @@ final class ViewController: UIViewController {
         button.tag = 0
         button.addTarget(self, action: #selector(editFontAction), for: .allTouchEvents)
         return button
-    }
-    private var editNonBoldFontButton: UIButton {
+    }()
+    private lazy var editNonBoldFontButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 60, y: 65, width: 30, height: 50))
         button.setTitle(Constants.titleNonBoldFont, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 40)
@@ -36,7 +36,7 @@ final class ViewController: UIViewController {
         button.tag = 1
         button.addTarget(self, action: #selector(editFontAction), for: .allTouchEvents)
         return button
-    }
+    }()
     private var editRedColorButton: UIButton {
         let button = UIButton(frame: CGRect(x: 120, y: 65, width: 50, height: 50))
         button.backgroundColor = Constants.colors[0]
@@ -99,6 +99,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         showNewViewElementAndTarget()
+        
     }
     
     // MARK: - Private Methods
@@ -122,7 +123,7 @@ final class ViewController: UIViewController {
     
     @objc private func editFontAction(sender: UIButton) {
         switch sender.tag {
-        case 0: textView.font = UIFont(name: nameFont + "-Bold", size: CGFloat(Constants.sizeFont))
+        case 0: textView.font = UIFont(name: nameFont + "-Bold", size: CGFloat(editSizeTextSlider.value))
         case 1: textView.font = UIFont(name: nameFont, size: CGFloat(Constants.sizeFont))
         case 2: textView.textColor = Constants.colors[0]
         case 3: textView.textColor = Constants.colors[1]
@@ -148,7 +149,7 @@ final class ViewController: UIViewController {
         view.backgroundColor = backgroungColor
         editBoldFontButton.setTitleColor(color, for: .normal)
         editNonBoldFontButton.setTitleColor(color, for: .normal)
-        
+        fontPickerView.setValue(color, forKey: "textColor")
     }
     
 }
@@ -161,12 +162,13 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return Constants.nameFonts.count
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return Constants.nameFonts[row]
     }
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         nameFont = Constants.nameFonts[row]
         textView.font = UIFont(name: nameFont, size: 20)
     }
-    
 }
