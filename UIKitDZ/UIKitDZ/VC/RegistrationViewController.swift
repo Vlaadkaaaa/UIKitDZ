@@ -52,6 +52,7 @@ final class RegistrationViewController: UIViewController {
                 alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
                 present(alertController, animated: true)
             } else {
+                users.userDefaults.set(loginTextField.text, forKey: "login")
                 users.addNewUser(surname: surnameTextField.text ?? "",
                                  name: nameTextField.text ?? "",
                                  login: loginTextField.text ?? "",

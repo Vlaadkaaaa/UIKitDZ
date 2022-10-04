@@ -16,7 +16,9 @@ struct Users {
     private var name: String?
     private var login: String?
     private var password: String?
-        
+     
+    var userDefaults = UserDefaults.standard
+    
     mutating func addNewUser(surname: String, name: String, login: String, password: String) {
         for user in users {
             if user.login == login {
