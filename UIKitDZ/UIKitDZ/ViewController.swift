@@ -7,7 +7,7 @@
 
 import UIKit
 
-///
+/// Редактирование текста  в TextView
 final class ViewController: UIViewController {
     
     private enum Constants {
