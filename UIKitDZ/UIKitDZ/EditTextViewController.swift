@@ -9,6 +9,8 @@ import UIKit
 
 /// Добавление и редактирование текста
 final class EditTextViewController: UIViewController {
+    
+    // MARK: - Private Visual Component
     private var textLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 40, y: 200, width: 310, height: 200))
         label.text = "The Swift Developers"
@@ -44,14 +46,17 @@ final class EditTextViewController: UIViewController {
         return slider
     }()
     
+    // MARK: - Private Propetry
     private var colorsName = ["black", "green", "blue", "red"]
     private var colors = [UIColor.black, UIColor.systemGreen, UIColor.systemBlue, UIColor.systemRed]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         showViewElementandAction()
     }
     
+    // MARK: - Private Method
     private func showViewElementandAction() {
         title = "Edit Text"
         tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
@@ -72,6 +77,7 @@ final class EditTextViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self, action: #selector(shoAlertAction))
     }
+    
     @objc private func changeSwitchAction() {
         if boldSwitch.isOn {
             textLabel.font = .boldSystemFont(ofSize: 25)
@@ -79,6 +85,7 @@ final class EditTextViewController: UIViewController {
             textLabel.font = .systemFont(ofSize: 25)
         }
     }
+    
     @objc private func shoAlertAction() {
         let alertController = UIAlertController(title: "Введите текст", message: "", preferredStyle: .alert)
         alertController.addTextField()
@@ -93,12 +100,14 @@ final class EditTextViewController: UIViewController {
         
         present(alertController, animated: true)
     }
+    
     @objc private func changeSliderAction() {
         textLabel.font = textLabel.font.withSize(CGFloat(textSizeSlider.value))
     }
 }
 
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
+
 extension EditTextViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -107,6 +116,7 @@ extension EditTextViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return 4
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView.tag == 0 {
             return "\(row)"
@@ -115,6 +125,7 @@ extension EditTextViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         }
         
     }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 0 {
             textLabel.numberOfLines = row
