@@ -6,9 +6,10 @@
 //
 
 import UIKit
-///
+/// Переводчик
 final class TranslateViewController: UIViewController {
     
+    // MARK: - IBOUtlet
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var wordTextField: UITextField!
     
@@ -16,6 +17,7 @@ final class TranslateViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    // MARK: - IBAction
     @IBAction func translateWordAction(_ sender: Any) {
         switch wordTextField.text {
         case "Привет": wordLabel.text = "Hello"

@@ -6,16 +6,19 @@
 //
 
 import UIKit
-///
+/// Игра "Угадай Число"
 final class GuessNumberViewController: UIViewController {
     
+    // MARK: - IBOutlet
     @IBOutlet weak var sliderOutlet: UISlider!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
-    @IBAction func sliderAction(_ sender: Any) {
-    }
+    
+    // MARK: - IBAction
+
     @IBAction func guessNumberAction(_ sender: Any) {
         let random = Int.random(in: 0...100)
         if "\(random)" == "\(sliderOutlet.value)" {

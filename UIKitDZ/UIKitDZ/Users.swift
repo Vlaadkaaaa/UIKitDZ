@@ -6,15 +6,17 @@
 //
 
 import Foundation
-///
+/// Хранение пользователей
 struct Users {
+    // MARK: - Public Property
+    var users = [(surname: "Lymar", name: "Vlad", login: "vladka", password: "vladka")]
+    
+    // MARK: - Private Property
     private var surname: String?
     private var name: String?
     private var login: String?
     private var password: String?
-    
-    var users = [(surname: "Lymar", name: "Vlad", login: "vladka", password: "vladka")]
-    
+        
     mutating func addNewUser(surname: String, name: String, login: String, password: String) {
         for user in users {
             if user.login == login {

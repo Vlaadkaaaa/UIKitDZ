@@ -7,13 +7,14 @@
 
 import UIKit
 
-///
+/// Первый экран приложения
 final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    // MARK: - IBAction
     @IBAction func signInAction(_ sender: Any) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyBoard.instantiateViewController(
@@ -22,6 +23,7 @@ final class ViewController: UIViewController {
         
         present(vc, animated: true, completion: nil)
     }
+    
     @IBAction func registrationAction(_ sender: Any) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyBoard.instantiateViewController(
@@ -29,5 +31,4 @@ final class ViewController: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
-    
 }

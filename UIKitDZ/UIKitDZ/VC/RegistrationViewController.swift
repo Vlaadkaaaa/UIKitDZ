@@ -6,27 +6,32 @@
 //
 
 import UIKit
-///
+/// Регистрация
 final class RegistrationViewController: UIViewController {
     
-    @IBOutlet weak var surnameTextField: UITextField!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var loginTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    // MARK: - IBOutlet
+    @IBOutlet private weak var surnameTextField: UITextField!
+    @IBOutlet private weak var nameTextField: UITextField!
+    @IBOutlet private weak var loginTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
     
     var users = Users()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         notificationSettingKeyboard()
+        signAsADelegate()
+    }
+    
+    // MARK: - Private Method
+    private func signAsADelegate() {
         surnameTextField.delegate = self
         nameTextField.delegate = self
         loginTextField.delegate = self
         passwordTextField.delegate = self
     }
     
-    func notificationSettingKeyboard() {
-        
+    private func notificationSettingKeyboard() {
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification,
                                                object: nil, queue: nil) { _ in
             self.view.frame.origin.y = -CGFloat(200)
@@ -37,6 +42,7 @@ final class RegistrationViewController: UIViewController {
         }
     }
     
+    // MARK: - IBAction
     @IBAction func registerAction(_ sender: Any) {
         for user in users.users {
             if user.login == loginTextField.text {
@@ -62,6 +68,7 @@ final class RegistrationViewController: UIViewController {
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == surnameTextField {
