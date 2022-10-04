@@ -10,10 +10,18 @@ import UIKit
 ///
 final class ViewController: UIViewController {
     
+    private enum Constants {
+        static let titleBoldFont = "A"
+        static let titleNonBoldFont = "a"
+        static let sizeFont = 20
+        static let slideValue = (min: Float(10), max: Float(50), value: Float(20))
+        static let colors = [UIColor.systemRed, UIColor.systemGreen, UIColor.systemBlue, UIColor.black]
+        static let nameFonts = ["Arial", "Copperplate", "Georgia", "Zapfino"]
+    }
     // MARK: - Visual Components
     private var editBoldFontButton: UIButton {
         let button = UIButton(frame: CGRect(x: 25, y: 65, width: 30, height: 50))
-        button.setTitle("A", for: .normal)
+        button.setTitle(Constants.titleBoldFont, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 40)
         button.setTitleColor(.black, for: .normal)
         button.tag = 0
@@ -22,7 +30,7 @@ final class ViewController: UIViewController {
     }
     private var editNonBoldFontButton: UIButton {
         let button = UIButton(frame: CGRect(x: 60, y: 65, width: 30, height: 50))
-        button.setTitle("a", for: .normal)
+        button.setTitle(Constants.titleNonBoldFont, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 40)
         button.setTitleColor(.black, for: .normal)
         button.tag = 1
@@ -31,7 +39,7 @@ final class ViewController: UIViewController {
     }
     private var editRedColorButton: UIButton {
         let button = UIButton(frame: CGRect(x: 120, y: 65, width: 50, height: 50))
-        button.backgroundColor = .systemRed
+        button.backgroundColor = Constants.colors[0]
         button.tag = 2
         button.layer.cornerRadius = button.frame.height / 2
         button.addTarget(self, action: #selector(editFontAction), for: .allTouchEvents)
@@ -40,7 +48,7 @@ final class ViewController: UIViewController {
     private var editGreenColorButton: UIButton {
         let button = UIButton(frame: CGRect(x: 160, y: 65, width: 50, height: 50))
         button.tag = 3
-        button.backgroundColor = .systemGreen
+        button.backgroundColor = Constants.colors[1]
         button.layer.cornerRadius = button.frame.height / 2
         button.addTarget(self, action: #selector(editFontAction), for: .allTouchEvents)
         return button
@@ -48,7 +56,7 @@ final class ViewController: UIViewController {
     private var editBlueColorButton: UIButton {
         let button = UIButton(frame: CGRect(x: 200, y: 65, width: 50, height: 50))
         button.tag = 4
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = Constants.colors[2]
         button.layer.cornerRadius = button.frame.height / 2
         button.addTarget(self, action: #selector(editFontAction), for: .allTouchEvents)
         return button
@@ -56,16 +64,16 @@ final class ViewController: UIViewController {
     private var editBlackColorButton: UIButton {
         let button = UIButton(frame: CGRect(x: 240, y: 65, width: 50, height: 50))
         button.tag = 5
-        button.backgroundColor = .black
+        button.backgroundColor = Constants.colors[3]
         button.layer.cornerRadius = button.frame.height / 2
         button.addTarget(self, action: #selector(editFontAction), for: .allTouchEvents)
         return button
     }
     private var editSizeTextSlider: UISlider {
         let slider = UISlider(frame: CGRect(x: 30, y: 140, width: 330, height: 30))
-        slider.minimumValue = 10
-        slider.maximumValue = 48
-        slider.value = 20
+        slider.minimumValue = Constants.slideValue.min
+        slider.maximumValue = Constants.slideValue.max
+        slider.value = Constants.slideValue.value
         slider.addTarget(self, action: #selector(changeSliderAction), for: .valueChanged)
         return slider
     }
@@ -79,44 +87,47 @@ final class ViewController: UIViewController {
         var pickerView = UIPickerView(frame: CGRect(x: 112.5, y: 600, width: 165, height: 100))
         return pickerView
     }()
-
+    private let themeBlackSwitch: UISwitch = {
+        let themeSwicth = UISwitch(frame: CGRect(x: 180, y: 750, width: 0, height: 0))
+        
+        return themeSwicth
+    }()
+    
     // MARK: - Private Properties
-   private let nameFonts = ["Arial", "Copperplate", "Georgia", "Zapfino"]
     private var nameFont = ""
-    // MARK: - Public Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showNewViewElement()
-        fontPickerView.delegate = self
-        fontPickerView.dataSource = self
+        showNewViewElementAndTarget()
     }
     
     // MARK: - Private Methods
-    private func showNewViewElement() {
+    private func showNewViewElementAndTarget() {
         view.addSubview(editRedColorButton)
         view.addSubview(editGreenColorButton)
         view.addSubview(editBlueColorButton)
         view.addSubview(editBlackColorButton)
-        
         view.addSubview(editBoldFontButton)
         view.addSubview(editNonBoldFontButton)
-        
         view.addSubview(editSizeTextSlider)
-        
         view.addSubview(textView)
-        
         view.addSubview(fontPickerView)
+        view.addSubview(themeBlackSwitch)
+        
+        fontPickerView.delegate = self
+        fontPickerView.dataSource = self
+        
+        themeBlackSwitch.addTarget(self, action: #selector(changeSwitchAction), for: .valueChanged)
     }
     
     @objc private func editFontAction(sender: UIButton) {
         switch sender.tag {
-        case 0: textView.font = UIFont(name: nameFont + "-Bold", size: 20)
-        case 1: textView.font = UIFont(name: nameFont, size: 20)
-        case 2: textView.textColor = .systemRed
-        case 3: textView.textColor = .systemGreen
-        case 4: textView.textColor = .systemBlue
-        case 5: textView.textColor = .black
+        case 0: textView.font = UIFont(name: nameFont + "-Bold", size: CGFloat(Constants.sizeFont))
+        case 1: textView.font = UIFont(name: nameFont, size: CGFloat(Constants.sizeFont))
+        case 2: textView.textColor = Constants.colors[0]
+        case 3: textView.textColor = Constants.colors[1]
+        case 4: textView.textColor = Constants.colors[2]
+        case 5: textView.textColor = Constants.colors[3]
         default: break
         }
     }
@@ -124,7 +135,21 @@ final class ViewController: UIViewController {
     @objc private func changeSliderAction(sender: UISlider) {
         textView.font = UIFont(name: nameFont, size: CGFloat(sender.value))
     }
-    // MARK: - Constants
+    
+    @objc private func changeSwitchAction(sender: UISwitch) {
+        if sender.isOn {
+            changeColor(backgroungColor: .black, color: .white)
+        } else {
+            changeColor(backgroungColor: .white, color: .black)
+        }
+    }
+    
+    private func changeColor(backgroungColor: UIColor, color: UIColor) {
+        view.backgroundColor = backgroungColor
+        editBoldFontButton.setTitleColor(color, for: .normal)
+        editNonBoldFontButton.setTitleColor(color, for: .normal)
+        
+    }
     
 }
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
@@ -134,13 +159,13 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return nameFonts.count
+        return Constants.nameFonts.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return nameFonts[row]
+        return Constants.nameFonts[row]
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        nameFont = nameFonts[row]
+        nameFont = Constants.nameFonts[row]
         textView.font = UIFont(name: nameFont, size: 20)
     }
     
