@@ -14,6 +14,7 @@ final class SignInViewController: UIViewController {
     var users = Users()
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordTextField.isSecureTextEntry = true
         
     }
     

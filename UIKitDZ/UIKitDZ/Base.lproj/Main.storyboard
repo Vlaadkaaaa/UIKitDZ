@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="UIKitDZ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="UIKitDZ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -125,7 +125,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="nmD-6d-FTD">
             <objects>
-                <viewController storyboardIdentifier="SignInVC" id="55G-Of-PVK" customClass="SignInViewController" customModule="UIKitDZ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="55G-Of-PVK" customClass="SignInViewController" customModule="UIKitDZ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QQH-e5-7z4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -223,7 +223,7 @@
         <!--Registration View Controller-->
         <scene sceneID="gw0-3A-I2X">
             <objects>
-                <viewController storyboardIdentifier="RegistrationVC" id="5Cu-Kf-saO" customClass="RegistrationViewController" customModule="UIKitDZ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrationVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Cu-Kf-saO" customClass="RegistrationViewController" customModule="UIKitDZ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CQa-z6-vsH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -367,7 +367,7 @@
         <!--Game-->
         <scene sceneID="k3l-m5-P5H">
             <objects>
-                <viewController storyboardIdentifier="GuessNumberVC" id="b3i-ut-8oy" customClass="GuessNumberViewController" customModule="UIKitDZ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GuessNumberVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="b3i-ut-8oy" customClass="GuessNumberViewController" customModule="UIKitDZ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="082-oG-blX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -436,7 +436,7 @@
         <!--Translate-->
         <scene sceneID="lJ0-IC-5yP">
             <objects>
-                <viewController storyboardIdentifier="TranslateVC" id="nz1-hO-mQh" customClass="TranslateViewController" customModule="UIKitDZ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TranslateVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nz1-hO-mQh" customClass="TranslateViewController" customModule="UIKitDZ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zAh-Pm-Vbr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -517,7 +517,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="TgY-ec-VDH">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarController" id="h2g-aR-bRC" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="h2g-aR-bRC" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="ZaT-kX-V5G"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q0J-wt-4ep">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
