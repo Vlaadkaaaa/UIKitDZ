@@ -61,7 +61,7 @@ final class ViewController: UIViewController {
         button.addTarget(self, action: #selector(editFontAction), for: .allTouchEvents)
         return button
     }
-    private let editBlackColorButton: UIButton {
+    private var editBlackColorButton: UIButton {
         let button = UIButton(frame: CGRect(x: 240, y: 65, width: 50, height: 50))
         button.tag = 5
         button.backgroundColor = Constants.colors[3]
@@ -69,7 +69,7 @@ final class ViewController: UIViewController {
         button.addTarget(self, action: #selector(editFontAction), for: .allTouchEvents)
         return button
     }
-    private let editSizeTextSlider: UISlider {
+    private var editSizeTextSlider: UISlider {
         let slider = UISlider(frame: CGRect(x: 30, y: 140, width: 330, height: 30))
         slider.minimumValue = Constants.slideValue.min
         slider.maximumValue = Constants.slideValue.max
