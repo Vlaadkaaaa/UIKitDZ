@@ -61,7 +61,7 @@ final class ViewController: UIViewController {
         button.addTarget(self, action: #selector(editFontAction), for: .allTouchEvents)
         return button
     }
-    private var editBlackColorButton: UIButton {
+    private let editBlackColorButton: UIButton {
         let button = UIButton(frame: CGRect(x: 240, y: 65, width: 50, height: 50))
         button.tag = 5
         button.backgroundColor = Constants.colors[3]
@@ -69,7 +69,7 @@ final class ViewController: UIViewController {
         button.addTarget(self, action: #selector(editFontAction), for: .allTouchEvents)
         return button
     }
-    private var editSizeTextSlider: UISlider {
+    private let editSizeTextSlider: UISlider {
         let slider = UISlider(frame: CGRect(x: 30, y: 140, width: 330, height: 30))
         slider.minimumValue = Constants.slideValue.min
         slider.maximumValue = Constants.slideValue.max
@@ -77,10 +77,21 @@ final class ViewController: UIViewController {
         slider.addTarget(self, action: #selector(changeSliderAction), for: .valueChanged)
         return slider
     }
-    private var textView: UITextView = {
+    private let textView: UITextView = {
         var textView = UITextView(frame: CGRect(x: 30, y: 180, width: 330, height: 330))
         textView.backgroundColor = .lightGray
         textView.font = .systemFont(ofSize: 20)
+        textView.text = """
+Нам, учитель дорогой,
+Ваш характер нравится!
+Кроме Вас, никто другой
+С нами не управится!
+
+Вы - добры и справедливы!
+Вы - во всем пример для нас!
+Самых лучших чувств порывы
+Выражает Вам наш класс!
+"""
         return textView
     }()
     private let fontPickerView: UIPickerView = {
@@ -166,7 +177,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return Constants.nameFonts[row]
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         nameFont = Constants.nameFonts[row]
         textView.font = UIFont(name: nameFont, size: 20)
