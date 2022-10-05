@@ -17,11 +17,10 @@ final class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.delegate = self
-        
+        passwordTextFieldShow()
     }
     
+    // MARK: - IBAction
     @IBAction func registretionAction(_ sender: Any) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyBoard.instantiateViewController(
@@ -29,6 +28,7 @@ final class SignInViewController: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
+    
     @IBAction func signInAction(_ sender: Any) {
         for user in users.users {
             if user.login != loginTextField.text && user.password != passwordTextField.text {
@@ -47,10 +47,17 @@ final class SignInViewController: UIViewController {
             }
         }
     }
+    
+    // MARK: - Private Func
+    private func passwordTextFieldShow() {
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.delegate = self
+    }
 }
 
+// MARK: - UITextFieldDelegate
 extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            passwordTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
     }
 }

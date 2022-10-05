@@ -18,7 +18,6 @@ final class GuessNumberViewController: UIViewController {
     }
     
     // MARK: - IBAction
-
     @IBAction func guessNumberAction(_ sender: Any) {
         let random = Int.random(in: 0...100)
         if "\(random)" == "\(sliderOutlet.value)" {

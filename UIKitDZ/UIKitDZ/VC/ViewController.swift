@@ -11,6 +11,7 @@ import UIKit
 final class ViewController: UIViewController {
     
     var users = Users()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

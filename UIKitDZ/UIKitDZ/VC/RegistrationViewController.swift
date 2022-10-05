@@ -23,25 +23,6 @@ final class RegistrationViewController: UIViewController {
         signAsADelegate()
     }
     
-    // MARK: - Private Method
-    private func signAsADelegate() {
-        surnameTextField.delegate = self
-        nameTextField.delegate = self
-        loginTextField.delegate = self
-        passwordTextField.delegate = self
-    }
-    
-    private func notificationSettingKeyboard() {
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification,
-                                               object: nil, queue: nil) { _ in
-            self.view.frame.origin.y = -CGFloat(200)
-        }
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidHideNotification,
-                                               object: nil, queue: nil) { _ in
-            self.view.frame.origin.y = 0
-        }
-    }
-    
     // MARK: - IBAction
     @IBAction func registerAction(_ sender: Any) {
         for user in users.users {
@@ -65,7 +46,25 @@ final class RegistrationViewController: UIViewController {
                 present(vc, animated: true, completion: nil)
             }
         }
-        
+    }
+    
+    // MARK: - Private Method
+    private func signAsADelegate() {
+        surnameTextField.delegate = self
+        nameTextField.delegate = self
+        loginTextField.delegate = self
+        passwordTextField.delegate = self
+    }
+    
+    private func notificationSettingKeyboard() {
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification,
+                                               object: nil, queue: nil) { _ in
+            self.view.frame.origin.y = -CGFloat(200)
+        }
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidHideNotification,
+                                               object: nil, queue: nil) { _ in
+            self.view.frame.origin.y = 0
+        }
     }
 }
 
