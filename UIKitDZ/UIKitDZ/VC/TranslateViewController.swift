@@ -10,8 +10,8 @@ import UIKit
 final class TranslateViewController: UIViewController {
     
     // MARK: - IBOUtlet
-    @IBOutlet weak var wordLabel: UILabel!
-    @IBOutlet weak var wordTextField: UITextField!
+    @IBOutlet private weak var wordLabel: UILabel!
+    @IBOutlet private weak var wordTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()

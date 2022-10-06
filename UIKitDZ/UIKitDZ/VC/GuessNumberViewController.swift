@@ -10,7 +10,7 @@ import UIKit
 final class GuessNumberViewController: UIViewController {
     
     // MARK: - IBOutlet
-    @IBOutlet weak var sliderOutlet: UISlider!
+    @IBOutlet private weak var slider: UISlider!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ final class GuessNumberViewController: UIViewController {
     // MARK: - IBAction
     @IBAction func guessNumberAction(_ sender: Any) {
         let random = Int.random(in: 0...100)
-        if "\(random)" == "\(sliderOutlet.value)" {
+        if "\(random)" == "\(slider.value)" {
             let alertController = UIAlertController(title:
                                                         "Поздравляю!! Вы угадали", message: "",
                                                     preferredStyle: .alert)
