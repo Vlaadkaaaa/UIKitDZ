@@ -7,48 +7,51 @@
 
 import UIKit
 
-///
+/// Timer
 final class ViewController: UIViewController {
-  
+    
     // MARK: - IBOutlet
-    @IBOutlet weak var timerLabel: UILabel!
-
-    @IBOutlet weak var startOutlet: UIButton!
+    @IBOutlet private weak var timerLabel: UILabel!
+    @IBOutlet private weak var startOutlet: UIButton!
     
     // MARK: - Private Properties
-    private var timer: Timer?
-    private var currentTime: Float = 0.0
-    // MARK: - Initializers
-    
-    // MARK: - UIViewController (*)
-    
-    // MARK: - Public Methods
+    private var timer = Timer()
+    private var isStart = false
+    private var currentTime = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     // MARK: - IBAction
-    
     @IBAction func resetAction(_ sender: Any) {
+        currentTime = 0
+        updateTime()
     }
+    
     @IBAction func startAction(_ sender: Any) {
-        startTimer()
+        if !isStart {
+            isStart = true
+            self.startOutlet.setTitle("Stop", for: .normal)
+            self.timer = Timer.scheduledTimer(timeInterval: 0.01,
+                                              target: self, selector: #selector(updateTime),
+                                              userInfo: nil, repeats: true)
+        } else {
+            isStart = false
+            self.startOutlet.setTitle("Start", for: .normal)
+             self.timer.invalidate()
+        }
     }
+    
     // MARK: - Private Methods
-    private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 0.1,
-                                     target: self, selector: #selector(updateTimer),
-                                    userInfo: nil, repeats: true)
+    @objc private func updateTime() {
+        if !isStart {
+            let timeStr = String(format: "%02d:%02d", 0, 0)
+            self.timerLabel.text = timeStr
+        } else {
+            currentTime += 1
+            let timeStr = String(format: "%02d:%02d", (currentTime / 100 ) % 60, currentTime % 100)
+            self.timerLabel.text = timeStr
+        }
     }
-    @objc private func updateTimer(sender: Timer) {
-        currentTime += Float(sender.timeInterval)
-    }
-    private func updateLabel() {
-        timerLabel.text = "\(currentTime)"
-    }
-    // MARK: - Types
-    
-    // MARK: - Constants
-    
 }
