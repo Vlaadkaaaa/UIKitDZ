@@ -8,7 +8,7 @@
 import UIKit
 
 /// Timer
-final class ViewController: UIViewController {
+final class TimerViewController: UIViewController {
     
     // MARK: - IBOutlet
     @IBOutlet private weak var timerLabel: UILabel!
@@ -32,14 +32,14 @@ final class ViewController: UIViewController {
     @IBAction func startAction(_ sender: Any) {
         if !isStart {
             isStart = true
-            self.startOutlet.setTitle("Stop", for: .normal)
-            self.timer = Timer.scheduledTimer(timeInterval: 0.01,
+            startOutlet.setTitle("Stop", for: .normal)
+            timer = Timer.scheduledTimer(timeInterval: 0.01,
                                               target: self, selector: #selector(updateTime),
                                               userInfo: nil, repeats: true)
         } else {
             isStart = false
-            self.startOutlet.setTitle("Start", for: .normal)
-             self.timer.invalidate()
+            startOutlet.setTitle("Start", for: .normal)
+             timer.invalidate()
         }
     }
     
@@ -47,11 +47,11 @@ final class ViewController: UIViewController {
     @objc private func updateTime() {
         if !isStart {
             let timeStr = String(format: "%02d:%02d", 0, 0)
-            self.timerLabel.text = timeStr
+            timerLabel.text = timeStr
         } else {
             currentTime += 1
             let timeStr = String(format: "%02d:%02d", (currentTime / 100 ) % 60, currentTime % 100)
-            self.timerLabel.text = timeStr
+            timerLabel.text = timeStr
         }
     }
 }
