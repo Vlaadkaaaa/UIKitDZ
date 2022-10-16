@@ -7,21 +7,21 @@
 
 import UIKit
 
-/// Светофор с constraint  в коде
+/// Светофор с использованием NSLayoutConstraint
 final class ConstraintViewController: UIViewController {
     
     // MARK: Constants
     private enum Constants {
-        static let title = "ConstraintViewController"
+        static let title = "Constraint ViewController"
     }
     
     // MARK: - Private Visual Components
-    private lazy var redView = createView(size: 250, color: .red)
-    private lazy var yellowView = createView(size: 250, color: .systemYellow)
-    private lazy var greenView = createView(size: 250, color: .systemGreen)
+    private lazy var redView = createView(color: .red)
+    private lazy var yellowView = createView(color: .systemYellow)
+    private lazy var greenView = createView(color: .systemGreen)
     
     private let blackView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 270, height: 270))
+        let view = UIView()
         view.backgroundColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -46,8 +46,8 @@ final class ConstraintViewController: UIViewController {
         createBlackConstraint()
     }
     
-    private func createView(size: Int, color: UIColor) -> UIView {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: size, height: size))
+    private func createView(color: UIColor) -> UIView {
+        let view = UIView()
         view.backgroundColor = color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

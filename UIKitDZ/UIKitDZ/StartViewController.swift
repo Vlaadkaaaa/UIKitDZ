@@ -17,20 +17,22 @@ final class StartViewController: UIViewController {
         static let storyboardVCTitle = "Storyboard VC"
         static let anchorVCTitle = "Anchor VC"
         static let stackVCTitle = "Stack VC"
+        static let storyboardName = "Main"
+        static let withIdentifierStoryboardVC = "StoryboardVC"
     }
-
-    private lazy var constraintButton: UIButton = {
+    
+    private lazy var storyboardButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 100, y: 100, width: 190, height: 30))
-        button.setTitle(Constants.constraintVCTitle, for: .normal)
+        button.setTitle(Constants.storyboardVCTitle, for: .normal)
         button.backgroundColor = .systemBlue
         button.tag = 0
         button.addTarget(self, action: #selector(showNewVCAction(sender:)), for: .touchUpInside)
         return button
     }()
     
-    private lazy var storyboardButton: UIButton = {
+    private lazy var constraintButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 100, y: 200, width: 190, height: 30))
-        button.setTitle(Constants.storyboardVCTitle, for: .normal)
+        button.setTitle(Constants.constraintVCTitle, for: .normal)
         button.backgroundColor = .systemBlue
         button.tag = 1
         button.addTarget(self, action: #selector(showNewVCAction(sender:)), for: .touchUpInside)
@@ -63,8 +65,8 @@ final class StartViewController: UIViewController {
     
     private func setupUI() {
         title = Constants.title
-        view.addSubview(constraintButton)
         view.addSubview(storyboardButton)
+        view.addSubview(constraintButton)
         view.addSubview(anchorButton)
         view.addSubview(stackButton)
     }
@@ -72,12 +74,12 @@ final class StartViewController: UIViewController {
     @objc func showNewVCAction(sender: UIButton) {
         switch sender.tag {
         case 0:
-            let vc = ConstraintViewController()
+            let storyBoard = UIStoryboard(name: Constants.storyboardName, bundle: nil)
+            guard let vc = storyBoard.instantiateViewController(
+                withIdentifier: Constants.withIdentifierStoryboardVC) as? StoryboardViewController else {return}
             navigationController?.pushViewController(vc, animated: true)
         case 1:
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            guard let vc = storyBoard.instantiateViewController(
-                withIdentifier: "StoryboardVC") as? StoryboardViewController else {return}
+            let vc = ConstraintViewController()
             navigationController?.pushViewController(vc, animated: true)
         case 2:
             let vc = AnchorViewController()
