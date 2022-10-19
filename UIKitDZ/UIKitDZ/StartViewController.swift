@@ -21,6 +21,7 @@ final class StartViewController: UIViewController {
         static let withIdentifierStoryboardVC = "StoryboardVC"
     }
     
+    // MARK: Private Visual components
     private lazy var storyboardButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 100, y: 100, width: 190, height: 30))
         button.setTitle(Constants.storyboardVCTitle, for: .normal)
@@ -63,6 +64,7 @@ final class StartViewController: UIViewController {
         setupUI()
     }
     
+    // MARK: - Private Methods
     private func setupUI() {
         title = Constants.title
         view.addSubview(storyboardButton)
@@ -71,7 +73,7 @@ final class StartViewController: UIViewController {
         view.addSubview(stackButton)
     }
     
-    @objc func showNewVCAction(sender: UIButton) {
+    @objc private func showNewVCAction(sender: UIButton) {
         switch sender.tag {
         case 0:
             let storyBoard = UIStoryboard(name: Constants.storyboardName, bundle: nil)
@@ -89,6 +91,5 @@ final class StartViewController: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
         default: break
         }
-        
     }
 }

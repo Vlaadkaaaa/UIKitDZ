@@ -9,10 +9,15 @@ import UIKit
 
 /// Contraints задаются через Storyboard
 final class StoryboardViewController: UIViewController {
-   
+    
+    // MARK: Private Constant
+    private enum Constants {
+        static let title = "Storyboard ViewController"
+    }
+    
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Storyboard ViewController"
+        title = Constants.title
     }
-
 }
